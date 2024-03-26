@@ -18,20 +18,15 @@ function AffinityDiagram({ answers }) {
         }
       );
       const data = await response.json();
+      const diagram = data.affinity_diagram["Affinity Diagram"];
 
-      if (
-        data.affinity_diagram &&
-        typeof data.affinity_diagram.AffinityDiagram === "object"
-      ) {
-        const diagramData = Object.entries(
-          data.affinity_diagram.AffinityDiagram
-        ).map(([mainCategory, challenges]) => ({
-          mainCategory,
-          challenges: challenges.map((challenge) => ({
-            category: challenge.Category,
-            points: challenge.Points,
-          })),
-        }));
+      if (diagram && typeof diagram === "object") {
+        const diagramData = Object.entries(diagram).map(
+          ([category, points]) => ({
+            category: category,
+            points: points,
+          })
+        );
 
         setAffinityDiagramData(diagramData);
       } else {
@@ -49,13 +44,11 @@ function AffinityDiagram({ answers }) {
       </button>
       {affinityDiagramData && (
         <div className="affinity-diagram">
-          {affinityDiagramData.map((mainCategoryGroup, index) => (
-            <div key={index} className="main-category">
-              <h2 className="main-category-title">
-                {mainCategoryGroup.mainCategory}
-              </h2>
+          {affinityDiagramData.map((categoryGroup, index) => (
+            <div key={index} className="category">
+              <h2 className="category-title">{categoryGroup.category}</h2>
               <ul className="points">
-                {mainCategoryGroup.points.map((point, pointIndex) => (
+                {categoryGroup.points.map((point, pointIndex) => (
                   <li key={pointIndex} className="point">
                     {point}
                   </li>

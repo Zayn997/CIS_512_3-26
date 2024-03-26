@@ -51,17 +51,17 @@
   gap: 20px; /* Space between the challenge cards */
 }
 
-.challenge {
+.category {
   flex: 1; /* Flex items will grow to fill space */
   min-width: 250px; /* Minimum width before wrapping */
-  background-color: #f2f2f2; /* Slightly different background for contrast */
+  background-color: #ececec; /* Slightly different background for contrast */
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.challenge-title {
-  font-size: 18px;
+.category-title {
+  font-size: 20px;
   color: #444444;
   margin-bottom: 8px;
   font-weight: bold; /* Make the title bold */
@@ -73,7 +73,7 @@
 }
 
 .point {
-  background-color: #e9ecef;
+  background-color: #dcdfe1;
   padding: 8px;
   margin-bottom: 8px;
   border-radius: 4px;

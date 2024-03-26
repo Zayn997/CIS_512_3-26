@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Set your OpenAI API key here
-openai.api_key = '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'
+openai.api_key = 'enter-the-key'
 user_answers = []
 
 
@@ -99,7 +99,7 @@ def analyze_sentiment():
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": f"Use number range from 0.1 to 1 to summarize the user's sentiment more positive more higher, more negative more lower,only show number value,The following text: \"{text}\" expresses a sentiment number that is:"},
+                {"role": "user", "content": f"Use number range from 0.10 to 2.00 to evaluate the user's sentiment more positive more higher, more negative more lower,for example,love is 1.80, hate is 0.10, dislike is 0.25, like is 1.02, only show number value,The following text: \"{text}\" expresses a sentiment number that is:"},
             ],
             temperature=0.0
         )
@@ -153,6 +153,8 @@ def generate_priority_matrix():
         priority_matrix = response.choices[0].message.content.strip()
            # Parse the priority matrix string into a JSON object
         priority_matrix_json = json.loads(priority_matrix)
+        print("Cleaned Priority Matirx JSON:", priority_matrix_json)
+
         return jsonify({'priorityMatrix': priority_matrix_json})
     except Exception as e:
         return jsonify({'error': str(e)}), 500

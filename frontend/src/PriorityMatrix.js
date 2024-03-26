@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 import "./PriorityMatrix.css";
 
+function extractTextFromHtml(htmlString) {
+  const tempDivElement = document.createElement("div");
+  // Assign the HTML string to the innerHTML of the div
+  tempDivElement.innerHTML = htmlString;
+  // Use textContent to get the text version, which strips off all HTML tags
+  return tempDivElement.textContent || tempDivElement.innerText || "";
+}
+
 function PriorityMatrix({ answers }) {
   const [priorityMatrix, setPriorityMatrix] = useState(null);
 
   const fetchPriorityMatrix = async () => {
-    const user_answers = answers.map((answer) => answer.text);
+    // Extract text from HTML answers
+    const user_answers = answers.map((answer) =>
+      extractTextFromHtml(answer.text)
+    );
     try {
       const response = await fetch(
         "http://127.0.0.1:5000/generatePriorityMatrix",
