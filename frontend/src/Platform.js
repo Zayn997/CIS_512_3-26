@@ -96,6 +96,8 @@ const Platform = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="add-project">
         <button className="add-project-btn" onClick={handleClick}>
           Add New Project{" "}
         </button>

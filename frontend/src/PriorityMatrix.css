@@ -6,7 +6,7 @@
   background-color: #f9f9f9;
 }
 
-.priority-matrix-section .loginBtn {
+/* .priority-matrix-section .loginBtn {
   padding: 10px 20px;
   background-color: #ff0081;
   color: white;
@@ -20,7 +20,7 @@
 .priority-matrix-section .loginBtn:hover {
   background-color: #e4137c;
   transition: all 0.3s ease-in-out;
-}
+} */
 
 .priority-matrix-section .priority-matrix {
   overflow-x: auto;

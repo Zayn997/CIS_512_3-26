@@ -8,6 +8,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Set your OpenAI API key here
+openai.api_key = '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'
 user_answers = []
 
 
@@ -66,7 +67,7 @@ def generate_questions():
         for _ in range(3):  # Generate 3 similar questions
             if last_answer and ask_for_details:
                 # If the last answer is provided and not detailed enough, ask for more details
-                message = f"The user's last answer was: \"{last_answer}\". It seems brief. Could you ask a follow-up question to get more details?"
+                message = f"The user's last answer was: \"{last_answer}\". It seems brief. Could you ask a follow-up question to get more details? the question should only contain content without any additional text or explanation."
             else:
                 # Generate a new UX interview question
                 message = f"Generate a UX interview question base on the following doucuments: {topic},{background},{ backgroundFile},{keyQuestions}"
@@ -133,19 +134,26 @@ def extract_keywords():
     
 @app.route('/generatePriorityMatrix', methods=['POST'])
 def generate_priority_matrix():
-    combined_answers = " ".join(user_answers)
+    data = request.json
+    print("Received data:", data)  # 打印接收到的数据
+    text = data.get('text', [])
+    combined_answers = " ".join(text)
+    print("Current user_answers:", combined_answers)  # 打印当前的 user_answers 列表
+
 
     try:
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": f"Generate a structured JSON object representing an priority matrix based on the user's answers: {combined_answers}. The JSON should contain the four categories ('Urgent and Important', 'Important but Not Urgent', 'Urgent but Not Important', 'Not Urgent and Not Important') and the associated tasks for each category. without any additional text or explanation."},
+                {"role": "user", "content": f"Generate a standard structured JSON object representing an priority matrix based on the user's answers: {combined_answers}. The JSON should contain the four categories ('Urgent and Important', 'Important but Not Urgent', 'Urgent but Not Important', 'Not Urgent and Not Important') and the associated tasks for each category. without any additional text or explanation."},
             ],
             temperature=0.5
         )
         priority_matrix = response.choices[0].message.content.strip()
-        return jsonify({'priorityMatrix': priority_matrix})
+           # Parse the priority matrix string into a JSON object
+        priority_matrix_json = json.loads(priority_matrix)
+        return jsonify({'priorityMatrix': priority_matrix_json})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     
@@ -163,15 +171,21 @@ def generate_affinity_diagram():
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": f"Generate a structured JSON object representing an affinity diagram based on the user's answers: {combined_answers}. The JSON should only contain the categories and associated points without any additional text or explanation."},
+                {"role": "user", "content": f"Generate a standard structured JSON object representing an affinity diagram based on the user's answers: {combined_answers}. The JSON should only contain the categories and associated points without any additional text or explanation."},
             ],
             temperature=0.5
         )
-        # Parse the response to extract the JSON-formatted affinity diagram
-        affinity_diagram_json = response.choices[0].message.content.strip()
+        affinity_diagram_json = response.choices[0].message.content.strip().replace("```json\n", "").replace("\n```", "")
+        print("Cleaned Affinity Diagram JSON:", affinity_diagram_json)
+
+        # Now try parsing the cleaned JSON string
         affinity_diagram = json.loads(affinity_diagram_json)
         return jsonify({'affinity_diagram': affinity_diagram})
+    except json.JSONDecodeError as json_error:
+        print("JSON decoding error:", json_error)
+        return jsonify({'error': 'JSON decoding error', 'details': str(json_error)}), 500
     except Exception as e:
+        print("An error occurred:", e)
         return jsonify({'error': str(e)}), 500
     
 

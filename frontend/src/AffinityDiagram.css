@@ -1,35 +1,88 @@
 /* AffinityDiagram.css */
+
+.affinity-diagram-section {
+  padding: 20px;
+  background-color: #f7f7f7;
+  font-family: Arial, sans-serif; /* Example font */
+  border-radius: 8px;
+}
+
+.loginBtn {
+  padding: 10px 20px;
+  background-color: #ff66b2; /* Adjusted to match the provided screenshot */
+  color: white;
+  border: none;
+  border-radius: 20px; /* More rounded corners */
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border: 2px solid transparent;
+  transition: background-color 0.3s, border-color 0.3s; /* Transition for hover effect */
+}
+
+.loginBtn:hover {
+  background-color: white;
+  color: #ff66b2;
+  border-color: #ff66b2;
+}
+
 .affinity-diagram {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 20px;
+}
+
+.main-category {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
 }
 
-.group {
-  background-color: #f0f0f0;
-  border-radius: 8px;
+.main-category-title {
+  font-size: 24px;
+  color: #333333;
+  margin-bottom: 16px;
+}
+
+.challenges-container {
+  display: flex; /* Use Flexbox to create a row */
+  flex-wrap: wrap; /* Allow items to wrap as needed */
+  gap: 20px; /* Space between the challenge cards */
+}
+
+.challenge {
+  flex: 1; /* Flex items will grow to fill space */
+  min-width: 250px; /* Minimum width before wrapping */
+  background-color: #f2f2f2; /* Slightly different background for contrast */
   padding: 15px;
-  width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.group-title {
-  margin: 0;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.items {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.item {
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
+.challenge-title {
+  font-size: 18px;
+  color: #444444;
   margin-bottom: 8px;
+  font-weight: bold; /* Make the title bold */
+}
+
+.points {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0; /* Remove default padding */
+}
+
+.point {
+  background-color: #e9ecef;
   padding: 8px;
-  text-align: center;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.point:first-of-type {
+  margin-top: 8px;
+}
+
+.point:last-of-type {
+  margin-bottom: 0;
 }

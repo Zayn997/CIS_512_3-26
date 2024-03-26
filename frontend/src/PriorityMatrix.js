@@ -18,13 +18,7 @@ function PriorityMatrix({ answers }) {
         }
       );
       const data = await response.json();
-      if (typeof data.priorityMatrix === "string") {
-        const parsedMatrix = JSON.parse(data.priorityMatrix);
-        setPriorityMatrix(parsedMatrix);
-      } else {
-        // If it's already an object, use it directly.
-        setPriorityMatrix(data.priorityMatrix);
-      }
+      setPriorityMatrix(data.priorityMatrix);
     } catch (error) {
       console.error("Error fetching priority matrix:", error);
     }
@@ -49,7 +43,7 @@ function PriorityMatrix({ answers }) {
                 ([category, tasks], index) => (
                   <tr key={index}>
                     <td>{category}</td>
-                    <td>{tasks.join(", ")}</td>
+                    <td>{Array.isArray(tasks) ? tasks.join(", ") : ""}</td>
                   </tr>
                 )
               )}
