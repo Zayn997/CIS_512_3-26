@@ -8,7 +8,6 @@ app = Flask(__name__)
 CORS(app)
 
 # Set your OpenAI API key here
-openai.api_key = 'enter-the-key'
 user_answers = []
 
 
