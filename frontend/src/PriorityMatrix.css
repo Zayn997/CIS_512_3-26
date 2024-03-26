@@ -1,0 +1,43 @@
+.priority-matrix-section {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.priority-matrix-section .loginBtn {
+  padding: 10px 20px;
+  background-color: #ff0081;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.priority-matrix-section .loginBtn:hover {
+  background-color: #e4137c;
+  transition: all 0.3s ease-in-out;
+}
+
+.priority-matrix-section .priority-matrix {
+  overflow-x: auto;
+}
+
+.priority-matrix-section .priority-matrix table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.priority-matrix-section .priority-matrix table th,
+.priority-matrix-section .priority-matrix table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.priority-matrix-section .priority-matrix table th {
+  background-color: #f2f2f2;
+}

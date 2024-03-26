@@ -1,0 +1,96 @@
+.big-figure {
+  width: 110px;
+  height: 100px;
+  background: linear-gradient(
+    180deg,
+    rgba(169, 57, 239, 0.589) 0%,
+    rgba(98, 62, 241, 0.568) 100%
+  );
+  border-radius: 50%;
+  position: absolute;
+  margin-top: 5%;
+
+  transform: translateX(-50%);
+  animation: npcBounce 2s infinite ease-in-out, popInOut 12s infinite; /* 使用逗号分隔两个动画 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1; /* Adjust z-index */
+  transition: all 0.3s ease; /* 平滑的过渡效果 */
+}
+
+.big-figure:hover {
+  transform: scale(1.2); /* 放大到原来的 1.2 倍大小 */
+  background-color: #ffe26e; /* 新的背景颜色 */
+  box-shadow: 0 0 15px #ffcc00; /* 添加阴影以增强效果 */
+  border: 2px solid #fff; /* 边框变化 */
+}
+
+.big-figure-eye {
+  width: 20px;
+  height: 20px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  margin: 0 5px;
+  animation: eyeBlink 4s infinite ease-in-out;
+  z-index: 1; /* Adjust z-index */
+}
+
+@keyframes npc-figure-Bounce {
+  0%,
+  100% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.13);
+  }
+}
+
+@keyframes eyeBlink {
+  0%,
+  100% {
+    height: 20px;
+  }
+  50% {
+    height: 10px;
+  }
+}
+
+@keyframes popInOut {
+  0% {
+    top: 0px; /* 第一个圈的垂直位置 */
+    left: 0px; /* 第一个圈的水平位置 */
+  }
+  25% {
+    top: 10px; /* 第一个圈的垂直位置 */
+    left: 10px; /* 第一个圈的水平位置 */
+  }
+  /* 重置，准备移动到下一个位置 */
+  30% {
+    top: -150px;
+    left: -150px;
+  }
+  /* 第二个位置的动画 */
+  50% {
+    top: 10px; /* 第二个圈的垂直位置 */
+    left: 50%; /* 第二个圈的水平位置，可以根据实际位置调整 */
+  }
+  /* 重置 */
+  55% {
+    top: -150px;
+    left: -150px;
+  }
+  75% {
+    top: 10px; /* 第三个圈的垂直位置 */
+    right: 10px; /* 第三个圈的水平位置 */
+  }
+  80% {
+    top: -150px;
+    right: -200px;
+  }
+  100% {
+    top: 10px; /* 第三个圈的垂直位置 */
+    right: 10px; /* 第三个圈的水平位置 */
+  }
+}

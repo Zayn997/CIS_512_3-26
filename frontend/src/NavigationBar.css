@@ -1,0 +1,116 @@
+/* NavigationBar.css */
+
+body {
+  padding-top: 70px; /* Adjust this value according to the height of your navigation bar */
+}
+.navigation-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0; /* Ensure the header spans the full width */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 2%; /* Reduced padding */
+  background-color: #ffffffcb;
+  border-bottom: 1px solid #dddddd;
+  color: #333333;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+}
+
+/* Reduce the size of the buttons or adjust margin if necessary */
+.navigation-header .button {
+  margin-right: 0.5rem; /* Adjusted margin */
+  padding: 0.5rem 1rem; /* Adjust as necessary */
+  /* Other styles for buttons */
+}
+
+/* Ensure the title has enough left margin so it doesn't overlap with the edge */
+
+.survey-name {
+  font-size: 2em; /* Adjust size as needed */
+}
+
+.survey-name {
+  position: relative;
+  padding: 10px 20px;
+  cursor: pointer; /* Optional: changes the cursor on hover */
+  /* Other styles for the survey name */
+}
+
+.survey-name::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid transparent; /* Set the border but make it transparent */
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+}
+
+.survey-name:hover::after {
+  border-color: #8e72ad; /* Change the border color on hover */
+}
+
+.navigation-buttons button {
+  padding: 8px 15px;
+  /* border: none; */
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 5px;
+  font-size: 1em; /* Adjust size as needed */
+  transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.review-button {
+  color: #9767d6;
+  background-color: #ffffff;
+  border: 1px solid #9767d6;
+}
+
+.publish-button {
+  color: #9767d6;
+  background-color: #ffffff;
+  border: 1px solid #9767d6;
+}
+
+/* Additional styling for other buttons or icons */
+.review-button:hover {
+  background-color: #9767d6;
+  color: #ffffff;
+}
+
+.publish-button:hover {
+  background-color: #9767d6;
+  color: #ffffff;
+}
+.fa-user {
+  margin-top: 10px;
+  margin-left: 20px;
+  color: #432863;
+  transition: all 0.3s ease-in-out;
+  font-size: 30px;
+}
+
+.fa-user:hover {
+  border-radius: 50%;
+  color: #e7e3eb;
+  background-color: #432863;
+  border-radius: 50%;
+}
+
+.title-link {
+  text-decoration: none;
+  color: inherit; /* This will make the link inherit the color of the surrounding text */
+}
+
+.navigation-buttons {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

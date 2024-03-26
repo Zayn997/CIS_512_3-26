@@ -1,0 +1,190 @@
+.platform-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  font-family: "Arial", sans-serif;
+  margin-left: 100px;
+}
+
+.search-bar {
+  display: flex;
+  margin-bottom: 1rem;
+  gap: 10px;
+}
+
+.search-bar input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* .search-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+} */
+
+.project-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.stat-send {
+  color: #9fa2b4;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.stat-send strong {
+  display: block;
+  font-size: 24px;
+  color: #ff589d;
+  margin: 10px 0;
+}
+
+.stat-response {
+  color: #9fa2b4;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.stat-response strong {
+  display: block;
+  font-size: 24px;
+  color: #138f58;
+  margin: 10px 0;
+}
+
+.stat-pend {
+  color: #9fa2b4;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.stat-pend strong {
+  display: block;
+  font-size: 24px;
+  color: #ce9f0f;
+  margin: 10px 0;
+}
+
+.stat {
+  background-color: #0a84ff;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); */
+}
+
+.stat-1 {
+  color: #9fa2b4;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.stat-1 strong {
+  display: block;
+  font-size: 24px;
+  color: #007bff;
+  margin: 10px 0;
+}
+
+.stat strong {
+  display: block;
+  font-size: 24px;
+  color: #ffffff;
+  margin: 10px 0;
+}
+
+.add-project-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Styles for the completion rate circle */
+.completion-circle {
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 0 auto;
+}
+
+.completion-circle::before {
+  content: "";
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  right: 5%;
+  bottom: 5%;
+  border-radius: 50%;
+  background: conic-gradient(#007bff var(--rate), #f0f0f0 0);
+  --rate: 84.32deg; /* Example for 84.32% */
+}
+
+.completion-circle span {
+  z-index: 1;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.semi-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.first-three {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 10px;
+  background-color: #0a84ff;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
