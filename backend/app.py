@@ -9,6 +9,7 @@ CORS(app)
 
 
 # Set your OpenAI API key here
+openai.api_key = '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'
 user_answers = []
 
 
@@ -138,7 +139,7 @@ def generate_priority_matrix():
     print("Received data:", data)  # 打印接收到的数据
     text = data.get('text', [])
     combined_answers = " ".join(text)
-    print("Current user_answers:", combined_answers)  # 打印当前的 user_answers 列表
+    print("Current user_answers:", combined_answers)  
 
 
     try:

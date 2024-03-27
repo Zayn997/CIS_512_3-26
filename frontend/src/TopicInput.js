@@ -10,7 +10,9 @@ function TopicInput({ onGenerate }) {
   const [topic, setTopic] = useState("");
   const [background, setBackground] = useState(""); // For ReactQuill input
   const [backgroundFile, setBackgroundFile] = useState(null); // For file upload
-  const [keyQuestions, setKeyQuestions] = useState("");
+  const [keyQuestions, setKeyQuestions] = useState([
+    { text: "", importance: "medium", subQuestions: [] }, // default starting question with subQuestions array
+  ]);
 
   const handleFileChange = (event) => {
     // Set the file to state and clear any text input for background
@@ -30,6 +32,58 @@ function TopicInput({ onGenerate }) {
 
     // You'll need to handle the form data in the onGenerate function
     // whether you want to upload the file or send the text
+  };
+
+  //key questions dropdown settings
+  const handleQuestionTextChange = (value, index) => {
+    // Update the text for a specific key question
+    const updatedQuestions = [...keyQuestions];
+    updatedQuestions[index].text = value;
+    setKeyQuestions(updatedQuestions);
+  };
+
+  const handleImportanceChange = (value, index) => {
+    // Update the importance for a specific key question
+    const updatedQuestions = [...keyQuestions];
+    updatedQuestions[index].importance = value;
+    setKeyQuestions(updatedQuestions);
+  };
+
+  const handleAddQuestion = () => {
+    setKeyQuestions([
+      ...keyQuestions,
+      { text: "", importance: "medium", subQuestions: [] },
+    ]);
+  };
+
+  const handleRemoveQuestion = (index) => {
+    // Remove a key question
+    const updatedQuestions = keyQuestions.filter((_, i) => i !== index);
+    setKeyQuestions(updatedQuestions);
+  };
+  //sub questions dropdown
+  const handleAddSubQuestion = (index) => {
+    const updatedQuestions = [...keyQuestions];
+    updatedQuestions[index].subQuestions.push(""); // Add an empty string for the new sub-question
+    setKeyQuestions(updatedQuestions);
+  };
+
+  // Handler for changing a sub-question's text
+  const handleSubQuestionTextChange = (
+    text,
+    questionIndex,
+    subQuestionIndex
+  ) => {
+    const updatedQuestions = [...keyQuestions];
+    updatedQuestions[questionIndex].subQuestions[subQuestionIndex] = text;
+    setKeyQuestions(updatedQuestions);
+  };
+
+  // Handler for removing a sub-question
+  const handleRemoveSubQuestion = (questionIndex, subQuestionIndex) => {
+    const updatedQuestions = [...keyQuestions];
+    updatedQuestions[questionIndex].subQuestions.splice(subQuestionIndex, 1);
+    setKeyQuestions(updatedQuestions);
   };
 
   return (
@@ -74,13 +128,74 @@ function TopicInput({ onGenerate }) {
         </div>
 
         <div className="type-2">
-          <h2>Questions Guide</h2>
-          <ReactQuill
-            className="key-questions-input"
-            placeholder="Enter key questions from the interview guide"
-            value={keyQuestions}
-            onChange={setKeyQuestions}
-          />
+          <h2>Key Questions Guide</h2>
+          {keyQuestions.map((question, index) => (
+            <div key={index} className="question-item">
+              <div className="key-item">
+                <textarea
+                  className="key-questions-input"
+                  placeholder="Enter your questions guide one by one"
+                  value={question.text}
+                  onChange={(e) =>
+                    handleQuestionTextChange(e.target.value, index)
+                  }
+                />
+                <select
+                  className="importance-dropdown"
+                  value={question.importance}
+                  onChange={(e) =>
+                    handleImportanceChange(e.target.value, index)
+                  }
+                >
+                  <option value="high">High</option>
+                  <option value="medium">Medium</option>
+                  <option value="low">Low</option>
+                </select>
+
+                <button
+                  type="button"
+                  onClick={() => handleRemoveQuestion(index)}
+                >
+                  Remove
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleAddSubQuestion(index)}
+                >
+                  Add Sub-question
+                </button>
+              </div>
+              {question.subQuestions.map((subQuestion, subIndex) => (
+                <div key={subIndex} className="sub-question-item">
+                  <textarea
+                    className="sub-questions-input"
+                    placeholder="Enter your sub-question"
+                    value={subQuestion}
+                    onChange={(e) =>
+                      handleSubQuestionTextChange(
+                        e.target.value,
+                        index,
+                        subIndex
+                      )
+                    }
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveSubQuestion(index, subIndex)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+          ))}
+          <button
+            className="loginBtn"
+            type="button"
+            onClick={handleAddQuestion}
+          >
+            Add Key Question
+          </button>
         </div>
       </div>
     </form>

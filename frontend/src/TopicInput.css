@@ -61,8 +61,16 @@
 }
 
 .key-questions-input {
-  height: 200px;
+  flex: 1;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  resize: vertical; /* Allow only vertical resizing */
+  height: 40px;
 }
+
 .background-input {
   height: 200px;
 }
@@ -75,7 +83,6 @@
     rgba(218, 178, 255, 0.856) 0%,
     rgba(142, 197, 252, 0.75) 100%
   );
-  height: 310px;
   border-radius: 10px;
 }
 
@@ -104,4 +111,81 @@
 
 .file-upload-label:hover {
   transform: scale(1.1); /* Slightly enlarge the icon */
+}
+
+.key-item {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.question-item {
+  background-color: #f0f0f065;
+  border-radius: 20px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.key-item p {
+  flex: 1;
+  margin: 0;
+  font-size: 16px;
+}
+
+.key-item select {
+  margin-left: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+/* Style for the button to remove the question, if needed */
+.key-item button {
+  margin-left: 10px;
+  border: none;
+  background-color: #ff6868;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.key-item button:hover {
+  background-color: #ff4c4c;
+}
+
+.sub-question-item {
+  display: flex;
+  align-items: center;
+  background-color: #e1e1e1;
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sub-question-item button {
+  margin-left: 10px;
+  border: none;
+  background-color: #ff6868;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.sub-questions-input {
+  flex: 1;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  resize: vertical; /* Allow only vertical resizing */
+  height: 40px;
 }
