@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import TopicInput from "./TopicInput";
-import QuestionsDisplay from "./QuestionsDisplay";
 import SentimentNPC from "./SentimentNPC";
-import PersonalInfoInput from "./PersonalInfoInput";
 import ReactQuill from "react-quill";
 import Particles from "./Particles";
 import CanvasComponent from "./CanvasComponent";
-import "react-quill/dist/quill.snow.css";
 import NavigationBar from "./NavigationBar";
+import QuestionsDisplay from "./QuestionsDisplay";
+import PersonalInfoInput from "./PersonalInfoInput";
+import { ProgressBar } from "react-bootstrap";
 import "./SurveyPage.css";
 
-function SurveyPage() {
+function IntervieweePage() {
+  const [topicData, setTopicData] = useState(null);
+  const [greeting, setGreeting] = useState("");
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState("");
@@ -19,17 +20,69 @@ function SurveyPage() {
   const [currentSentiment, setCurrentSentiment] = useState(0.5);
   const [currentInput, setCurrentInput] = useState("");
   const [keywordsCount, setKeywordsCount] = useState({});
+  const [content1Visible, setContent1Visible] = useState(false);
+  const [content2Visible, setContent2Visible] = useState(false);
+  const [greetingsVisible, setGreetingsVisible] = useState(false);
+  const [keywordsSummaryVisible, setKeywordsSummaryVisible] = useState(false);
+  const TOTAL_QUESTIONS = 10;
 
   const navigate = useNavigate();
+  useEffect(() => {
+    const handleScroll = () => {
+      const content1Position = document
+        .querySelector(".content-1")
+        .getBoundingClientRect().top;
+      const content2Position = document
+        .querySelector(".content-2")
+        .getBoundingClientRect().top;
+      const greetingsPosition = document
+        .querySelector(".Greetings")
+        .getBoundingClientRect().top;
+      const keywordsSummaryPosition = document
+        .querySelector(".keywords-summary")
+        .getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
 
-  const fetchGeneratedQuestions = async (topic) => {
+      if (content1Position < windowHeight) {
+        setContent1Visible(true);
+      }
+
+      if (content2Position < windowHeight) {
+        setContent2Visible(true);
+      }
+
+      if (greetingsPosition < windowHeight) {
+        setGreetingsVisible(true);
+      }
+
+      if (keywordsSummaryPosition < windowHeight) {
+        setKeywordsSummaryVisible(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  //get data from local store
+  useEffect(() => {
+    const storedTopicData = JSON.parse(localStorage.getItem("topicData"));
+    if (storedTopicData) {
+      setTopicData(storedTopicData);
+    }
+  }, []);
+
+  const fetchGeneratedQuestions = async (topicData) => {
     try {
       const response = await fetch("http://127.0.0.1:5000/generateQuestions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ topic }),
+        body: JSON.stringify({ topicData }),
       });
       const data = await response.json();
       setQuestions(data.questions);
@@ -39,7 +92,7 @@ function SurveyPage() {
     }
   };
 
-  const fetchFollowUpQuestions = async (topic, last_answer) => {
+  const fetchFollowUpQuestions = async (topicData, last_answer) => {
     try {
       const response = await fetch("http://127.0.0.1:5000/generateQuestions", {
         method: "POST",
@@ -47,7 +100,7 @@ function SurveyPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          topic, // Make sure 'topic' is defined in your state and is updated appropriately
+          topicData, // Make sure 'topic' is defined in your state and is updated appropriately
           last_answer,
           ask_for_details: true,
           // Include any other parameters if needed
@@ -112,16 +165,27 @@ function SurveyPage() {
       newKeywords.forEach((keyword) => {
         newCount[keyword] = (newCount[keyword] || 0) + 1;
       });
-      setKeywordsCount(newCount);
+      const newKeywordsWithColor = newKeywords.reduce((acc, keyword) => {
+        // If keyword is already in the state, use the existing color, otherwise generate a new color
+        acc[keyword] = keywordsCount[keyword] || {
+          count: 0,
+          color: getRandomColor(),
+        };
+        acc[keyword].count += 1;
+        return acc;
+      }, {});
+
+      setKeywordsCount({ ...keywordsCount, ...newKeywordsWithColor });
 
       setCurrentSentiment(sentimentScore); // Update the current sentiment for the NPC
       setCurrentInput(""); // Clear the input field
       // Check if we have asked less than 5 questions, if so, fetch a follow-up question
-      if (newAnswers.length < 2) {
-        // Since we're checking before adding the current answer, use < 4
+      if (newAnswers.length < 10) {
         await fetchFollowUpQuestions(lastAnswer);
-      }
-      if (currentQuestionIndex < questions.length - 1) {
+      } else if (newAnswers.length >= TOTAL_QUESTIONS) {
+        // Check if we have reached the total number of questions
+        // finishSurvey();
+      } else if (currentQuestionIndex < questions.length - 1) {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
       } else {
         console.log("End of questions");
@@ -138,6 +202,7 @@ function SurveyPage() {
     } else {
       console.log("End of questions");
     }
+    fetchGeneratedQuestions(topicData);
   };
 
   // Function to get a random color
@@ -157,17 +222,34 @@ function SurveyPage() {
   return (
     <div className="surveypage">
       <Particles />
-      <CanvasComponent /> {/* This is the background canvas */}
+      <CanvasComponent />
       <NavigationBar />
       <div className="survey-container">
-        <div className="content-1">
-          <div className="topic-input-wrapper">
-            <TopicInput onGenerate={fetchGeneratedQuestions} />
-          </div>
-          <div className="Greetings">
-            <PersonalInfoInput className="type-3" />
-          </div>
+        <div
+          className={`Greetings ${
+            greetingsVisible ? "fade-in visible" : "fade-in"
+          }`}
+        >
+          <PersonalInfoInput
+            className="type-3"
+            onGreetingGenerated={setGreeting}
+          />
+          {greeting && (
+            <div className="alert alert-success mt-3">{greeting}</div>
+          )}
+        </div>
+        <div
+          className={`content-1 ${
+            content1Visible ? "fade-in visible" : "fade-in"
+          }`}
+        >
           <div className="questions-display-wrapper">
+            <button
+              className="loginBtn"
+              onClick={() => topicData && fetchGeneratedQuestions(topicData)}
+            >
+              Generate Questions
+            </button>
             <QuestionsDisplay
               questions={questions}
               currentQuestionIndex={currentQuestionIndex}
@@ -175,11 +257,16 @@ function SurveyPage() {
             />
           </div>
         </div>
-        <div className="content-2">
+        <div
+          className={`content-2 ${
+            content2Visible ? "fade-in visible" : "fade-in"
+          }`}
+        >
           <div className="current-question">
             <h3 className="sub-title">Current Question</h3>
             <div className="current-q-content">
               <p className="current-q">{currentQuestion}</p>
+              <div className="tail"></div>
             </div>
           </div>
           <div className="sentiment-container">
@@ -202,28 +289,44 @@ function SurveyPage() {
                 Skip Question
               </button>
             </div>
+            {/* Progress Bar */}
+            {questions.length > 0 && (
+              <ProgressBar
+                className="custom-progress-bar"
+                now={(answers.length / TOTAL_QUESTIONS) * 100}
+                label={`${answers.length} / ${TOTAL_QUESTIONS}`}
+              />
+            )}
           </div>
         </div>
-
-        <div className="keywords-summary">
+        <div
+          className={`keywords-summary ${
+            keywordsSummaryVisible ? "fade-in visible" : "fade-in"
+          }`}
+        >
           <div className="keywords-title">
             <h3 className="sub-title">Keywords Summary</h3>
           </div>
           <div className="keywords-container">
             <div className="keywords-section">
-              {Object.entries(keywordsCount).map(([keyword, count]) => (
+              {Object.entries(keywordsCount).map(([keyword, data]) => (
                 <div
                   key={keyword}
                   className="keyword-item"
-                  style={{ backgroundColor: getRandomColor() }}
+                  style={{ backgroundColor: data.color }}
                 >
-                  {keyword}: {count}
+                  {keyword}: {data.count}
                 </div>
               ))}
             </div>
           </div>
         </div>
-        {currentQuestionIndex === questions.length - 1 && (
+        {/* {currentQuestionIndex === questions.length - 1 && (
+          <button className="loginBtn" onClick={finishSurvey}>
+            Finish Survey
+          </button>
+        )} */}
+        {answers.length === TOTAL_QUESTIONS && (
           <button className="loginBtn" onClick={finishSurvey}>
             Finish Survey
           </button>
@@ -233,4 +336,4 @@ function SurveyPage() {
   );
 }
 
-export default SurveyPage;
+export default IntervieweePage;

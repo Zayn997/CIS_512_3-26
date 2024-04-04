@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import AffinityDiagram from "./AffinityDiagram";
-import ComparisonChart from "./ComparisonChart";
 import PriorityMatrix from "./PriorityMatrix";
 import "./ResultsPage.css"; // Make sure to create this CSS file for styling
 import BubbleEffect from "./BubbleEffect";
 import Particles from "./Particles";
 import CanvasComponent from "./CanvasComponent";
 import NavigationBar from "./NavigationBar";
+import ImportanceScores from "./ImportanceScores";
 
 function ResultsPage() {
   const location = useLocation();
@@ -98,7 +98,7 @@ function ResultsPage() {
             <PriorityMatrix answers={answers} />
           </div>
           <div className="chart">
-            <ComparisonChart answers={answers} />
+            <ImportanceScores answers={answers} />
           </div>
         </div>
       </div>

@@ -1,13 +1,49 @@
+/* PersonalInfo.css */
 .personal-info-page {
+  padding: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 }
+
 .information-container {
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  padding: 20px;
+  width: 600px;
+  max-width: 800px;
+  margin-top: 150px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  margin-top: 10%;
+  justify-content: center;
+}
+
+.sub-title {
+  text-align: center;
+  color: #dfdfdf;
+  margin-bottom: 20px;
+}
+
+.personal-info-content {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
 }

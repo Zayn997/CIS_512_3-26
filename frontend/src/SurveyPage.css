@@ -14,6 +14,28 @@ body {
   filter: url("#goo");
 }
 
+.fade-in {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* .slide-in {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.slide-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+} */
+
 .surveypage {
   display: flex;
   justify-content: center;
@@ -46,12 +68,23 @@ canvas {
 }
 
 .topic-input-wrapper {
-  margin-bottom: 5%; /* Adjust the value as needed */
+  margin-top: 150px; /* Adjust the value as needed */
+}
+.interview-navi {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
 }
 
 /* Or, if you prefer to use padding */
 .questions-display-wrapper {
-  padding-top: 20px; /* Adjust the value as needed */
+  margin-top: 100px; /* Adjust the value as needed */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .content-2 {
@@ -60,6 +93,11 @@ canvas {
   justify-content: center;
   align-items: center;
   width: 50%;
+}
+
+.Greetings {
+  width: 50%;
+  margin-top: 200px;
 }
 
 .current-question {
@@ -163,28 +201,6 @@ canvas {
     64% 70%, 80% 71%;
 }
 
-.current-q-content {
-  width: 80%;
-  font-size: large;
-  padding-left: 20px;
-  padding-right: 20px;
-  color: rgb(6, 79, 148);
-  height: 150px;
-  border-radius: 16px;
-  /* background-color: rgba(157, 181, 241, 0.452); */
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  transition: transform 0.3s ease; /* For potential transform effects */
-}
-
-.current-q {
-  background-color: rgba(157, 181, 241, 0.452);
-  padding: 15px;
-  border-radius: 16px;
-}
-
 .chat-area {
   display: flex;
   flex-direction: column;
@@ -245,4 +261,98 @@ canvas {
 
 .current-question {
   gap: 50px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.current-q-content {
+  position: relative;
+  background-color: rgba(
+    185,
+    210,
+    243,
+    0.534
+  ); /* White background for the bubble */
+  /* border: 2px solid blue;  */
+  border-radius: 30px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  animation: pulse-cq 2s infinite ease-in-out;
+}
+
+.current-q {
+  font-size: 16px; /* Adjust font size as needed */
+  line-height: 1.5; /* For better readability */
+}
+
+/* Tail of the speech bubble */
+.tail {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: rgba(185, 210, 243, 0.534);
+  transform: translate(-50%, 50%) rotate(45deg);
+}
+
+/* To ensure the tail blends with the bubble */
+.current-q-content::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  border-style: solid;
+  border-width: 10px 10px 0;
+  border-color: rgba(51, 72, 100, 0.534) transparent;
+  transform: translate(-50%, 0%);
+}
+
+@keyframes pulse-cq {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02); /* Slightly larger */
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.sentiment-container {
+  margin-top: 20px;
+}
+
+.custom-progress-bar {
+  background-color: #e9ecef; /* This is the default background color, you may adjust as needed */
+  border-radius: 5px; /* Adjust as needed */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional, for a slight shadow */
+  height: 10px; /* Adjust the thickness of your progress bar */
+  width: 100%;
+}
+
+.custom-progress-bar .progress-bar {
+  background-color: #68cc58; /* Soft blue color similar to your image */
+  border-radius: 5px; /* Keep it consistent with the container */
+}
+
+.interview-navi p {
+  color: #007bff; /* Link color */
+  font-weight: bold;
+  margin-top: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.interview-navi p:hover {
+  color: #c82fce; /* Darker shade of blue on hover */
+}
+
+.gotointerviewee {
+  margin-top: 50px;
 }

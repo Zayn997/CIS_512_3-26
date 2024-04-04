@@ -2,7 +2,7 @@
   margin: 20px;
   padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #f9f9f9;
 }
 
@@ -40,4 +40,8 @@
 
 .priority-matrix-section .priority-matrix table th {
   background-color: #f2f2f2;
+}
+
+.priority-matrix {
+  max-width: 1000px;
 }

@@ -7,6 +7,8 @@ import PersonalInfo from "./PersonalInfo";
 import NavigationBar from "./NavigationBar";
 import Platform from "./Platform";
 import SignIn from "./SignIn";
+import ResearcherPage from "./ResearcherPage";
+import IntervieweePage from "./IntervieweePage";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/results" element={<ResultsPage />} />
           <Route path="/personalInfo" element={<PersonalInfo />} />
           <Route path="/platform" element={<Platform />} />
+          <Route path="/Researcher" element={<ResearcherPage />} />
+          <Route path="/interviewee" element={<IntervieweePage />} />
         </Routes>
       </div>
     </BrowserRouter>

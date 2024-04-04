@@ -4,7 +4,7 @@ import "./PersonalInfoInput.css"; // Import the CSS file for styling
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 
-function PersonalInfoInput() {
+function PersonalInfoInput({ onGreetingGenerated }) {
   const [personalInfo, setPersonalInfo] = useState({
     name: "",
     gender: "",
@@ -21,20 +21,29 @@ function PersonalInfoInput() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Create an array of strings from each key-value pair in the personalInfo object
+    const infoArray = Object.entries(personalInfo).map(([key, value]) => {
+      // Convert each property to a string, you can customize how each line should be displayed
+      return `${key}: ${value}`;
+    });
+    const personalInfoString = infoArray.join(", ");
+
     try {
       const response = await fetch("http://127.0.0.1:5000/generategreetings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ personalInfo }),
+        body: JSON.stringify({ personalInfo: personalInfoString }),
       });
       const data = await response.json();
-      setGreeting(data.personalInfo);
+      onGreetingGenerated(data.personalInfo);
+      navigate("/personalInfo", {
+        state: { personalInfo: personalInfoString },
+      });
     } catch (error) {
       console.error("Failed to fetch greeting:", error);
     }
-    navigate("/personalInfo", { state: { personalInfo } });
   };
 
   return (
@@ -110,7 +119,7 @@ function PersonalInfoInput() {
               onChange={handleChange}
             />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="loginBtn">
             Submit Info
           </button>
         </form>
@@ -118,7 +127,6 @@ function PersonalInfoInput() {
           Please enter your personal information
         </span>
       </div>
-      {greeting && <div className="alert alert-success mt-3">{greeting}</div>}
     </div>
   );
 }

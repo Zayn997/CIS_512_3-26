@@ -18,17 +18,12 @@ function AffinityDiagram({ answers }) {
         }
       );
       const data = await response.json();
-      const diagram = data.affinity_diagram["Affinity Diagram"];
 
-      if (diagram && typeof diagram === "object") {
-        const diagramData = Object.entries(diagram).map(
-          ([category, points]) => ({
-            category: category,
-            points: points,
-          })
-        );
-
-        setAffinityDiagramData(diagramData);
+      if (
+        data.affinity_diagram &&
+        Array.isArray(data.affinity_diagram.Categories)
+      ) {
+        setAffinityDiagramData(data.affinity_diagram.Categories);
       } else {
         console.error("Invalid format for affinity diagram data:", data);
       }
@@ -44,11 +39,11 @@ function AffinityDiagram({ answers }) {
       </button>
       {affinityDiagramData && (
         <div className="affinity-diagram">
-          {affinityDiagramData.map((categoryGroup, index) => (
+          {affinityDiagramData.map((category, index) => (
             <div key={index} className="category">
-              <h2 className="category-title">{categoryGroup.category}</h2>
+              <h2 className="category-title">{category.Category}</h2>
               <ul className="points">
-                {categoryGroup.points.map((point, pointIndex) => (
+                {category.Points.map((point, pointIndex) => (
                   <li key={pointIndex} className="point">
                     {point}
                   </li>

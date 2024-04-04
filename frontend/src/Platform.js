@@ -17,7 +17,7 @@ const Platform = () => {
 
   const handleClick = () => {
     // This function will be called when the back icon is clicked
-    navigate("/survey"); // Adjust the path as needed for your sign-in route
+    navigate("/Researcher"); // Adjust the path as needed for your sign-in route
   };
 
   // Here you would fetch the real data from the server using useEffect

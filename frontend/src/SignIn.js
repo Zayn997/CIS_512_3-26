@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SentimentNPC from "./SentimentNPC";
 import "./SignIn.css";
+import BigNPC from "./BigNPC";
 
 function SignIn() {
   const [email, setEmail] = useState("");
@@ -31,7 +32,7 @@ function SignIn() {
   return (
     <div className="signin-container">
       <div className="sentiment-container">
-        <SentimentNPC />
+        <BigNPC />
       </div>
       <div className="form-container">
         <h1 className="project-name">Smart Survey</h1>
@@ -77,7 +78,7 @@ function SignIn() {
             </button>
           </div>
         </form>
-        <div className="tail">
+        <div className="tail-sign-out">
           <h6>Don't you have an account?</h6>
           <button className="loginBtn-small">Sign up</button>
         </div>

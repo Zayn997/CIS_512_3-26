@@ -9,7 +9,7 @@ CORS(app)
 
 
 # Set your OpenAI API key here
-openai.api_key = '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'
+openai.api_key = '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'
 user_answers = []
 
 
@@ -57,6 +57,7 @@ user_answers = []
 def generate_questions():
     data = request.json
     topic = data.get('topic')
+    topicData = data.get('topicData')
     background = data.get('background')
     backgroundFile = data.get('backgroundFile')
     keyQuestions = data.get('keyQuestions')
@@ -71,7 +72,7 @@ def generate_questions():
                 message = f"The user's last answer was: \"{last_answer}\". It seems brief. Could you ask a follow-up question to get more details? the question should only contain content without any additional text or explanation."
             else:
                 # Generate a new UX interview question
-                message = f"Generate a UX interview question base on the following doucuments: {topic},{background},{ backgroundFile},{keyQuestions}"
+                message = f"Generate a UX interview question base on the following doucuments: {topicData}"
 
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
@@ -160,7 +161,7 @@ def generate_priority_matrix():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     
-# generate diagram
+# Generate affinity diagram
 @app.route('/generateAffinityDiagram', methods=['POST'])
 def generate_affinity_diagram():
     data = request.get_json()
@@ -174,7 +175,7 @@ def generate_affinity_diagram():
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": f"Generate a standard structured JSON object representing an affinity diagram based on the user's answers: {combined_answers}. The JSON should only contain the categories and associated points without any additional text or explanation."},
+                {"role": "user", "content": f"Generate a JSON object representing an affinity diagram based on the user's answers: {combined_answers}. The JSON should have the following format: {{'affinity_diagram': {{'Categories': [{{'Category': 'Category Name', 'Points': ['Point 1', 'Point 2', '...']}}]}}}}."},
             ],
             temperature=0.5
         )
@@ -183,7 +184,7 @@ def generate_affinity_diagram():
 
         # Now try parsing the cleaned JSON string
         affinity_diagram = json.loads(affinity_diagram_json)
-        return jsonify({'affinity_diagram': affinity_diagram})
+        return jsonify(affinity_diagram)
     except json.JSONDecodeError as json_error:
         print("JSON decoding error:", json_error)
         return jsonify({'error': 'JSON decoding error', 'details': str(json_error)}), 500
@@ -231,6 +232,8 @@ def generate_greetings():
               temperature=0.5
         )
         personalInfo = response.choices[0].message.content.strip()
+        print("personalInfo:", personalInfo)
+
         return jsonify({'personalInfo': personalInfo})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -269,6 +272,36 @@ def get_survey_stats():
     }
     return jsonify(stats)
 
+@app.route('/calculateImportanceScores', methods=['POST'])
+def calculate_importance_scores():
+    data = request.json
+    answers = data.get('answers', [])
+
+    def get_gpt_score(answer_text):
+        try:
+            response = openai.Completion.create(
+                model="gpt-3.5-turbo",
+                prompt=f"Rate the specificity and detail of this answer on a scale from 0 to 100: '{answer_text}'",
+                temperature=0,
+                max_tokens=10
+            )
+            result = response.choices[0].text.strip()
+            score = float(result)
+            return min(max(score, 0), 100)  # Ensure score is between 0 and 100
+        except Exception as e:
+            print(f"An error occurred while getting GPT score: {e}")
+            return 50.0  # Default to a neutral score in case of an error
+
+    scores = [
+        {
+            'answerIndex': idx + 1,
+            'answer': ans,
+            'importanceScore': get_gpt_score(ans)
+        }
+        for idx, ans in enumerate(answers)
+    ]
+
+    return jsonify(scores)
 
 if __name__ == '__main__':
     app.run(debug=True)

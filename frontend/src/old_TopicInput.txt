@@ -26,15 +26,6 @@ function TopicInput({ onGenerate }) {
     setBackground(content);
   };
 
-  const handleSave = (event) => {
-    event.preventDefault();
-    //save to local varible
-    const topicData = { topic, background, backgroundFile, keyQuestions };
-    localStorage.setItem("topicData", JSON.stringify(topicData));
-    // remind you all the data being saved
-    alert("Topic data saved successfully!");
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     onGenerate({ topic, background, backgroundFile, keyQuestions });
@@ -96,7 +87,7 @@ function TopicInput({ onGenerate }) {
   };
 
   return (
-    <form onSubmit={handleSave}>
+    <form onSubmit={handleSubmit}>
       <div className="search-box">
         <input
           type="text"
@@ -107,8 +98,7 @@ function TopicInput({ onGenerate }) {
         />
         <button className="search-btn" type="submit">
           <i
-            // className="fa fa-sharp fa-solid fa-circle-check"
-            className="fa-solid fa-floppy-disk"
+            className="fa fa-sharp fa-solid fa-circle-check"
             aria-hidden="true"
           ></i>
         </button>
@@ -157,15 +147,9 @@ function TopicInput({ onGenerate }) {
                     handleImportanceChange(e.target.value, index)
                   }
                 >
-                  <option className="high-option" value="high">
-                    High
-                  </option>
-                  <option className="medium-option" value="medium">
-                    Medium
-                  </option>
-                  <option className="low-option" value="low">
-                    Low
-                  </option>
+                  <option value="high">High</option>
+                  <option value="medium">Medium</option>
+                  <option value="low">Low</option>
                 </select>
 
                 <button

@@ -21,7 +21,7 @@ const NavigationBar = () => {
         </Link>
 
         <Link to="/platform">
-          <i class="fa-user fa-solid fa-house-user" aria-hidden="true"></i>{" "}
+          <i className="fa-user fa-solid fa-house-user" aria-hidden="true"></i>{" "}
         </Link>
 
         {/* Additional buttons or icons can be added here */}

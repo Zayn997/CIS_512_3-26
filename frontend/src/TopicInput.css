@@ -1,11 +1,10 @@
 .search-box {
   /* 绝对定位 水平垂直居中 */
-  position: absolute;
-  top: 6%;
+  position: relative;
   left: 50%;
   transform: translate(-50%, -50%);
   background: #49375e;
-  height: 70x;
+  height: 80px;
   border-radius: 40px;
   padding: 10px;
 }
@@ -23,7 +22,7 @@
   transition: 0.5s;
 }
 .search-btn {
-  color: #ffffff;
+  color: #0c3a9e;
   float: right;
   width: 40px;
   height: 60px;
@@ -39,7 +38,7 @@
 }
 /* 鼠标移入文本框变化 */
 .search-box:hover .search-txt {
-  width: 300px;
+  width: 500px;
   padding: 0 6px;
 }
 /* 鼠标移入搜索按钮变化 */
@@ -56,7 +55,7 @@
 }
 
 .text-input {
-  margin-top: 20%;
+  margin-top: 50px;
   width: auto;
 }
 
@@ -188,4 +187,16 @@
   font-size: 14px;
   resize: vertical; /* Allow only vertical resizing */
   height: 40px;
+}
+
+.high-option {
+  color: #ff7a00;
+}
+
+.medium-option {
+  color: #68cc58;
+}
+
+.low-option {
+  color: #0a84ff;
 }
