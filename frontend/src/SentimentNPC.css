@@ -16,10 +16,16 @@ body {
   width: 120px;
   height: 60px;
   border-radius: 60px 60px 3px 3px;
-  position: relative;
-  transition: transform 0.3s ease-in-out;
+  /* position: relative; */
+  transition: transform 0.8s ease-in-out;
   animation: npcBounce 2s ease-in-out infinite;
   z-index: 1; /* Adjust z-index */
+
+  position: absolute;
+  bottom: 305px; /* Anchor to the bottom of the parent */
+  left: 45%; /* Center horizontally */
+  transform: translateX(-50%) scale(var(--npc-scale)); /* Center and scale */
+  transform-origin: bottom center; /* Scale from bottom */
 }
 
 .npc:hover {
@@ -44,6 +50,7 @@ body {
   transition: transform 0.3s ease;
   transform-origin: bottom center; /* 设置变形原点在底部中心 */
   z-index: 1; /* Adjust z-index */
+  overflow: hidden; /* 确保瞳孔可以隐藏在眼睛里面 */
 }
 .npc-eye:hover {
   background-color: rgb(240, 240, 240); /* Change the background color */
@@ -55,6 +62,23 @@ body {
 .npc-eye:nth-child(2) {
   left: auto;
   right: 25px;
+}
+
+.npc-eye::before {
+  content: ""; /* CSS 伪元素需要content属性 */
+  position: absolute;
+  bottom: -10px; /* Start below the eye, hidden from view */
+  left: 5px; /* Center horizontally, adjust as needed */
+  width: 10px;
+  height: 10px;
+  background-color: rgb(92, 92, 92);
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out, bottom 0.3s ease-in-out;
+  z-index: 2; /* 确保瞳孔在眼白之上 */
+}
+
+.npc-eye:hover::before {
+  bottom: 5px; /* Adjust this value to position the pupil correctly when visible */
 }
 
 @keyframes npcBounce {

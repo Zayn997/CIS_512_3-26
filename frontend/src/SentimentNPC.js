@@ -50,16 +50,19 @@ function SentimentNPC({ sentiment }) {
     // Normalize sentiment to a 0-1 range for scaling
     const normalized = (sentiment - 0.1) / (2.0 - 0.1);
     // Scale the NPC between 0.5x to 1.5x its original size
-    return 0.9 + normalized;
+    // return 0.9 + normalized;
+    return 0.9 + normalized * 0.65;
   };
 
   const npcStyles = {
-    // transform: `scale(${getScaleFromSentiment(sentiment)})`,
+    // *first version -- transform: `scale(${getScaleFromSentiment(sentiment)})`,
     "--npc-scale": getScaleFromSentiment(sentiment),
     opacity: isVisible ? 1 : 0,
     transition:
       "opacity 0.8s ease-in-out, transform 0.8s ease-in-out, background-color 0.8s ease-in-out",
     backgroundColor: getColorFromSentiment(sentiment),
+    transform: `translateX(-50%) scale(${getScaleFromSentiment(sentiment)})`, // Apply both translate and scale
+    transformOrigin: "bottom center", // Ensure scaling happens upwards from the bottom
   };
 
   const eyeStyles = {
