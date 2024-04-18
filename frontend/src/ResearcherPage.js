@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TopicInput from "./TopicInput";
 import Particles from "./Particles";
-import CanvasComponent from "./CanvasComponent";
+// import CanvasComponent from "./CanvasComponent";
+import MouseEffect from "./MouseEffect";
 import NavigationBar from "./NavigationBar";
 
-import "./SurveyPage.css";
+import "./ResearcherPage.css";
 
 function ResearcherPage() {
   const navigate = useNavigate();
@@ -22,11 +23,12 @@ function ResearcherPage() {
   };
 
   return (
-    <div className="surveypage">
-      <Particles />
-      <CanvasComponent />
+    <div className="Researcherpage">
+      {/* <Particles /> */}
+      {/* <CanvasComponent /> */}
+      <MouseEffect />
       <NavigationBar />
-      <div className="survey-container">
+      <div className="Researcherpage-container">
         <div className="content-1">
           <div className="topic-input-wrapper">
             <TopicInput />

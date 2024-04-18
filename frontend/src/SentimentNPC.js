@@ -51,7 +51,7 @@ function SentimentNPC({ sentiment }) {
     const normalized = (sentiment - 0.1) / (2.0 - 0.1);
     // Scale the NPC between 0.5x to 1.5x its original size
     // return 0.9 + normalized;
-    return 0.9 + normalized * 0.65;
+    return 0.9 + normalized * 0.68;
   };
 
   const npcStyles = {

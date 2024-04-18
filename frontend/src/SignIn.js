@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import SentimentNPC from "./SentimentNPC";
 import "./SignIn.css";
 import BigNPC from "./BigNPC";
+import iconImage from "./image/image.png";
 
 function SignIn() {
   const [email, setEmail] = useState("");
@@ -35,7 +36,9 @@ function SignIn() {
         <BigNPC />
       </div>
       <div className="form-container">
-        <h1 className="project-name">Smart Survey</h1>
+        {/* <h1 className="project-name">Smart Survey</h1> */}
+        <img src={iconImage} alt="project-icon" className="project-name" />
+
         <h2 className="signin-title">Sign In</h2>
         <h6 className="instruction">
           Enter your email and password for signing in. Thanks{" "}

@@ -48,7 +48,7 @@ function PersonalInfoInput({ onGreetingGenerated }) {
 
   return (
     <div className="container">
-      <h2>Personal Information</h2>
+      <h2 className="personalI">Personal Information</h2>
       <div className="tooltip-container">
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
@@ -119,9 +119,11 @@ function PersonalInfoInput({ onGreetingGenerated }) {
               onChange={handleChange}
             />
           </div>
-          <button type="submit" className="loginBtn">
-            Submit Info
-          </button>
+          <div className="mb-3">
+            <button type="submit" className="loginBtn">
+              Submit Info
+            </button>
+          </div>
         </form>
         <span className="tooltip-text">
           Please enter your personal information

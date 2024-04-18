@@ -1,18 +1,17 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
 
-/* body {
+.Intervieweepage {
   overflow-x: hidden;
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     90deg,
-    rgba(224, 195, 252, 0.4) 0%,
-    rgba(142, 197, 252, 0.4) 100%
-  );
+    rgba(255, 249, 192, 0.4) 0%,
+    rgba(252, 142, 142, 0.4) 100%
+  ); */
   margin: 0;
   padding: 0;
-  height: 100%;
   overflow-y: auto;
-  filter: url("#goo");
-} */
+  /* filter: url("#goo"); */
+}
 
 .fade-in {
   opacity: 0;
@@ -25,23 +24,12 @@
   transform: translateY(0);
 }
 
-/* .slide-in {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
-}
-
-.slide-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-} */
-
-.surveypage {
+.Intervieweepage {
   display: flex;
   justify-content: center;
   flex-direction: column;
   gap: 50px;
-  position: relative;
+  /* position: relative; */
   width: 100%;
   height: 100%;
 }
@@ -54,13 +42,13 @@ canvas {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: 0;
   width: 100%;
   height: 100%;
   overflow-y: auto;
 }
 
-.survey-container {
+.Interviewee-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -147,13 +135,13 @@ canvas {
 .content-2 button {
   display: inline-block;
   padding: 1em 2em;
-  background-color: #ff0081;
+  background-color: #00cfb6;
   color: #fff;
   border-radius: 4px;
   border: none;
   cursor: pointer;
   position: relative;
-  box-shadow: 0 2px 25px rgba(233, 30, 99, 0.5);
+  box-shadow: 0 0px 6px rgba(65, 56, 59, 0.5);
   outline: 0;
   transition: transform ease-in 0.1s, background-color ease-in 0.1s,
     box-shadow ease-in 0.25s;
@@ -168,22 +156,22 @@ canvas {
   bottom: -2em;
   pointer-events: none;
   background-repeat: no-repeat;
-  background-image: radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    /*  */ radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%),
-    radial-gradient(circle, #ff0081 20%, transparent 20%);
+  background-image: radial-gradient(circle, #bbf2de 20%, transparent 20%),
+    radial-gradient(circle, #bbf2de 20%, transparent 20%),
+    radial-gradient(circle, #bbf2de 20%, transparent 20%),
+    radial-gradient(circle, #bbf2de 20%, transparent 20%),
+    radial-gradient(circle, #bbf2de 20%, transparent 20%),
+    radial-gradient(circle, #bbf2de 20%, transparent 20%),
+    radial-gradient(circle, #bbf2de 20%, transparent 20%),
+    radial-gradient(circle, #bbf2de 20%, transparent 20%),
+    radial-gradient(circle, #bbf2de 20%, transparent 20%),
+    /*  */ radial-gradient(circle, #bbf2de 20%, transparent 20%),
+    radial-gradient(circle, #bbf2de 20%, transparent 20%),
+    radial-gradient(circle, #bbf2de 20%, transparent 20%),
+    radial-gradient(circle, #bbf2de 20%, transparent 20%),
+    radial-gradient(circle, #bbf2de 20%, transparent 20%),
+    radial-gradient(circle, #bbf2de 20%, transparent 20%),
+    radial-gradient(circle, #bbf2de 20%, transparent 20%);
   background-position: 5% 44%, -5% 20%, 7% 5%, 23% 0%, 37% 0, 58% -2%, 80% 0%,
     100% -2%, -5% 80%, 100% 55%, 2% 100%, 23% 100%, 42% 100%, 60% 95%, 70% 96%,
     100% 100%;
@@ -207,7 +195,7 @@ canvas {
   justify-content: center;
   align-items: center;
   gap: 20px;
-  width: 700px;
+  width: 800px;
   height: auto;
 }
 
@@ -252,11 +240,12 @@ canvas {
   padding: 10px;
   background-image: linear-gradient(
     100deg,
-    rgba(218, 178, 255, 0.856) 0%,
-    rgba(142, 197, 252, 0.75) 100%
+    rgba(224, 195, 252, 0.89) 0%,
+    rgba(142, 197, 252, 0.658) 100%
   );
   height: auto;
   border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.336);
 }
 
 .current-question {
@@ -290,18 +279,6 @@ canvas {
   line-height: 1.5; /* For better readability */
 }
 
-/* Tail of the speech bubble */
-.tail {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 20px;
-  height: 20px;
-  background-color: rgba(185, 210, 243, 0.534);
-  transform: translate(-50%, 50%) rotate(45deg);
-}
-
-/* To ensure the tail blends with the bubble */
 .current-q-content::after {
   content: "";
   position: absolute;
@@ -357,7 +334,34 @@ canvas {
   margin-top: 50px;
 }
 
-/* .ql-toolbar {
-  display: inline;
-  white-space: nowrap;
-} */
+.button-container .loginBtn-skip {
+  background-color: #ff6868;
+  color: white;
+  border: none;
+
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border: 2px solid transparent;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.button-container .loginBtn-skip:hover {
+  background-color: white;
+  color: #ff6868;
+  border-color: #ff6868;
+}
+
+@keyframes canvasBackgroundFade {
+  0%,
+  100% {
+    background-color: #d6e9ff;
+  }
+  50% {
+    background-color: #a0cfff;
+  }
+}
+
+canvas {
+  animation: canvasBackgroundFade 30s ease-in-out infinite;
+}

@@ -1,26 +1,10 @@
 .priority-matrix-section {
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #f9f9f9;
+  margin: 20px 0;
+  text-align: center;
+  max-width: 400px;
+  height: 500px;
+  /* overflow-y: auto; */
 }
-
-/* .priority-matrix-section .loginBtn {
-  padding: 10px 20px;
-  background-color: #ff0081;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-bottom: 20px;
-  transition: all 0.3s ease-in-out;
-}
-
-.priority-matrix-section .loginBtn:hover {
-  background-color: #e4137c;
-  transition: all 0.3s ease-in-out;
-} */
 
 .priority-matrix-section .priority-matrix {
   overflow-x: auto;
@@ -43,5 +27,14 @@
 }
 
 .priority-matrix {
-  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 400px;
+  height: 500px;
+  overflow-y: auto;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
 }

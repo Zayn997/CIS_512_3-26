@@ -1,5 +1,9 @@
 .tooltip-container {
   position: relative;
+  /* display: flex; */
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tooltip-text {
@@ -65,13 +69,70 @@
   border-color: transparent transparent #f0f0f0 transparent;
 }
 
+.mb-3 {
+  width: 85%;
+  margin-left: 8%;
+}
+
 .container {
   padding: 10px;
-  background-image: linear-gradient(
-    100deg,
-    rgba(218, 178, 255, 0.856) 0%,
-    rgba(142, 197, 252, 0.75) 100%
-  );
+  background: rgb(255, 255, 255);
+  /* background-image: linear-gradient(100deg, #efdeff 0%, #cae3ff 100%); */
   height: 600px;
-  border-radius: 10px;
+  border-radius: 15px;
+  position: relative;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.274);
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 20px; /* This will be the width of the gradient border */
+
+  background-image: linear-gradient(to bottom, #b2b0ff, #b4d9ff);
+
+  border-radius: 15px 0 0 15px; /* Apply border-radius only to the left side */
+}
+
+.form-control {
+  display: block;
+  border: 2px solid #d6d6d6;
+  padding: 8px;
+
+  margin-bottom: 5px;
+  box-shadow: 0 0px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+textarea {
+  border: 1px solid #ccc;
+  box-shadow: 0 0px 4px rgba(0, 0, 0, 0.2);
+  background-color: #f8f9fb;
+}
+
+/* textarea::placeholder {
+  background-color: #f8f9fb;
+  padding: 8px;
+} */
+.personalI {
+  margin-left: 8%;
+}
+
+.form-control[type="text"] {
+  background-color: #f8f9fb;
+}
+
+.form-control[type="email"] {
+  background-color: #f8f9fb;
+}
+
+.form-control[type="date"] {
+  background-color: #f8f9fb;
+}
+
+.form-control[type="textarea"] {
+  background-color: #f8f9fb;
 }

@@ -1,0 +1,20 @@
+.summary-diagram {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.summary-item {
+  margin-bottom: 10px;
+}
+
+.summary-key {
+  font-weight: bold;
+}
+
+.summary-value {
+  margin-left: 10px;
+  color: #333;
+}

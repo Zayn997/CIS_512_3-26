@@ -13,8 +13,8 @@ body {
     rgba(169, 57, 239, 0.7) 0%,
     rgba(98, 62, 241, 0.7) 100%
   );
-  width: 120px;
-  height: 60px;
+  width: 150px;
+  height: 75px;
   border-radius: 60px 60px 3px 3px;
   /* position: relative; */
   transition: transform 0.8s ease-in-out;
@@ -23,7 +23,7 @@ body {
 
   position: absolute;
   bottom: 305px; /* Anchor to the bottom of the parent */
-  left: 45%; /* Center horizontally */
+  left: 40%; /* Center horizontally */
   transform: translateX(-50%) scale(var(--npc-scale)); /* Center and scale */
   transform-origin: bottom center; /* Scale from bottom */
 }
@@ -46,7 +46,7 @@ body {
   border-radius: 50%;
   position: absolute;
   top: 10px;
-  left: 25px;
+  left: 30px;
   transition: transform 0.3s ease;
   transform-origin: bottom center; /* 设置变形原点在底部中心 */
   z-index: 1; /* Adjust z-index */
@@ -61,7 +61,7 @@ body {
 
 .npc-eye:nth-child(2) {
   left: auto;
-  right: 25px;
+  right: 30px;
 }
 
 .npc-eye::before {

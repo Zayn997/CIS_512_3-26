@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import SentimentNPC from "./SentimentNPC";
 import ReactQuill from "react-quill";
 import Particles from "./Particles";
-import CanvasComponent from "./CanvasComponent";
+// import CanvasComponent from "./CanvasComponent";
 import NavigationBar from "./NavigationBar";
 import QuestionsDisplay from "./QuestionsDisplay";
 import PersonalInfoInput from "./PersonalInfoInput";
 import { ProgressBar } from "react-bootstrap";
-import "./SurveyPage.css";
+import "./IntervieweePage.css";
 
 function IntervieweePage() {
   const [topicData, setTopicData] = useState(null);
@@ -24,7 +24,7 @@ function IntervieweePage() {
   const [content2Visible, setContent2Visible] = useState(false);
   const [greetingsVisible, setGreetingsVisible] = useState(false);
   const [keywordsSummaryVisible, setKeywordsSummaryVisible] = useState(false);
-  const TOTAL_QUESTIONS = 10;
+  const TOTAL_QUESTIONS = 3;
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -220,11 +220,11 @@ function IntervieweePage() {
   };
 
   return (
-    <div className="surveypage">
+    <div className="Intervieweepage">
       <Particles />
-      <CanvasComponent />
+      {/* <CanvasComponent /> */}
       <NavigationBar />
-      <div className="survey-container">
+      <div className="Interviewee-container">
         <div
           className={`Greetings ${
             greetingsVisible ? "fade-in visible" : "fade-in"
@@ -263,7 +263,8 @@ function IntervieweePage() {
           }`}
         >
           <div className="current-question">
-            <h3 className="sub-title">Current Question</h3>
+            {/* can be commended */}
+            {/* <h3 className="sub-title">Current Question</h3> */}
             <div className="current-q-content">
               <p className="current-q">{currentQuestion}</p>
               <div className="tail"></div>
@@ -282,11 +283,11 @@ function IntervieweePage() {
               ></ReactQuill>
             </div>
             <div className="button-container">
+              <button className="loginBtn-skip" onClick={handleSkipQuestion}>
+                Skip Question
+              </button>
               <button className="loginBtn" onClick={handleSubmitAnswer}>
                 Submit Answer
-              </button>
-              <button className="loginBtn" onClick={handleSkipQuestion}>
-                Skip Question
               </button>
             </div>
             {/* Progress Bar */}
@@ -321,11 +322,7 @@ function IntervieweePage() {
             </div>
           </div>
         </div>
-        {/* {currentQuestionIndex === questions.length - 1 && (
-          <button className="loginBtn" onClick={finishSurvey}>
-            Finish Survey
-          </button>
-        )} */}
+
         {answers.length === TOTAL_QUESTIONS && (
           <button className="loginBtn" onClick={finishSurvey}>
             Finish Survey

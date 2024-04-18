@@ -156,7 +156,7 @@ body {
 .sub-title {
   visibility: visaible;
   transition: all 0.4s ease-in-out;
-  background-color: #ff008098;
+  background-color: #00cfb6;
 
   padding: 10px;
   border-radius: 10px;
@@ -168,4 +168,17 @@ body {
   color: rgba(59, 109, 202, 0.815);
   transition: all 0.4s ease-in-out;
   background-color: rgb(255, 255, 255);
+}
+
+.generate-question-item {
+  /* background-image: linear-gradient(to bottom, #bbf2de83, #6fd9de79); */
+  color: rgb(41, 41, 41);
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  transition: all 0.2s ease-in-out;
+}
+
+.generate-question-item:hover {
+  color: rgb(255, 255, 255);
 }

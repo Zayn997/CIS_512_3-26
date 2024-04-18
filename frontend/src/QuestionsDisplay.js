@@ -12,7 +12,7 @@ function QuestionsDisplay({
   return (
     <div className="displayed-questions">
       <div className="title">
-        <h3 className="sub-title">Generated Questions</h3>
+        {/* <h3 className="sub-title">Generated Questions</h3> */}
       </div>
       <div className="main">
         {questions.map((question, index) => (
@@ -21,7 +21,7 @@ function QuestionsDisplay({
             className="question-frame" // 你需要定义这个样式
             onClick={() => onQuestionSelect(question)}
           >
-            <div className="question-item">{question}</div>
+            <div className="generate-question-item">{question}</div>
           </div>
         ))}
       </div>

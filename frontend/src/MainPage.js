@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Particles from "./Particles";
+// import Particles from "./Particles";
 import CanvasComponent from "./CanvasComponent";
 import BigNPC from "./BigNPC";
 import { FaInfoCircle } from "react-icons/fa"; // Using React Icons for the 'i' icon
@@ -19,7 +19,7 @@ function MainPage() {
 
   return (
     <div className="homepage">
-      <Particles />
+      {/* <Particles /> */}
       <CanvasComponent /> {/* This is the background canvas */}
       <div className="big-npc">
         <BigNPC />

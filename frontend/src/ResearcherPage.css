@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
+
+.Researcherpage {
+  overflow-x: hidden;
+  background-image: linear-gradient(
+    90deg,
+    hsla(157, 100%, 95%, 0.5) 0%,
+    hsla(157, 100%, 95%, 0.533) 100%
+  );
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: hidden;
+  /* z-index: 99; */
+  /* filter: url("#goo"); */
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* .slide-in {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.slide-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+} */
+
+.Researcherpage {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 50px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.content-1 {
+  width: 60%;
+  gap: 50px;
+}
+
+.Researcherpage-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.interview-navi {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.interview-navi p {
+  color: #006969;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.interview-navi p:hover {
+  color: #c82fce;
+}
+
+.gotointerviewee {
+  margin-top: 50px;
+}

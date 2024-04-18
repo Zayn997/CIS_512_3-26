@@ -10,8 +10,13 @@ const CanvasComponent = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const c = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+
+    const updateCanvasSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = document.body.clientHeight;
+    };
+
+    updateCanvasSize();
 
     class Circle {
       constructor(x, y, radius, vx, vy, rgb, opacity, birth, life) {
@@ -20,7 +25,7 @@ const CanvasComponent = () => {
         this.radius = radius;
         this.vx = vx;
         this.vy = vy;
-        this.rgb = rgb; // Save rgb as a property
+        this.rgb = rgb;
         this.opacity = opacity;
         this.birth = birth;
         this.life = life;
@@ -29,7 +34,7 @@ const CanvasComponent = () => {
       draw() {
         c.beginPath();
         c.arc(this.x, this.y, this.radius, Math.PI * 2, false);
-        c.fillStyle = `rgba(${this.rgb},${this.opacity})`; // Use this.rgb here
+        c.fillStyle = `rgba(${this.rgb},${this.opacity})`;
         c.fill();
       }
 
@@ -50,19 +55,10 @@ const CanvasComponent = () => {
 
         this.x += this.vx;
         this.y += this.vy;
-
         this.opacity = 1 - ((frame - this.birth) * 1) / this.life;
 
         if (frame > this.birth + this.life) {
-          for (let i = 0; i < circleArray.length; i++) {
-            if (
-              this.birth === circleArray[i].birth &&
-              this.life === circleArray[i].life
-            ) {
-              circleArray.splice(i, 1);
-              break;
-            }
-          }
+          circleArray = circleArray.filter((circle) => circle !== this);
         } else {
           this.draw();
         }
@@ -70,7 +66,6 @@ const CanvasComponent = () => {
     }
 
     let circleArray = [];
-
     const colorArray = ["224, 195, 252", "142, 197, 252", "224, 195, 222"];
 
     const drawCircles = () => {
@@ -88,16 +83,12 @@ const CanvasComponent = () => {
     };
 
     const handleMouseMove = (event) => {
-      mouse.x = event.clientX;
-      mouse.y = event.clientY;
-      drawCircles();
+      mouse.x = event.clientX + window.scrollX;
+      mouse.y = event.clientY + window.scrollY;
     };
 
     const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      // Reinitialize or adjust the canvas and particles as needed
-      // initCanvas();
+      updateCanvasSize();
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -108,17 +99,19 @@ const CanvasComponent = () => {
       requestAnimationFrame(animate);
       frame += 1;
       c.clearRect(0, 0, canvas.width, canvas.height);
+      drawCircles(); // Draw new circles on each frame to follow the mouse
+
       circleArray.forEach((circle) => circle.update());
     };
 
     animate();
 
-    // Clean up event listeners on component unmount
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Add eslint-disable-line here to ignore the warning
 
   return <canvas ref={canvasRef}></canvas>;
 };

@@ -1,15 +1,20 @@
 /* AffinityDiagram.css */
 
 .affinity-diagram-section {
-  padding: 20px;
+  /* padding: 20px;
   background-color: #f7f7f7;
-  font-family: Arial, sans-serif; /* Example font */
+  font-family: Arial, sans-serif; 
   border-radius: 8px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); */
+  margin: 20px 0;
+  text-align: center;
+  max-width: 400px;
+  height: 500px;
 }
 
 .loginBtn {
   padding: 10px 20px;
-  background-color: #ff66b2; /* Adjusted to match the provided screenshot */
+  background-color: #00cfb6; /* Adjusted to match the provided screenshot */
   color: white;
   border: none;
   border-radius: 20px; /* More rounded corners */
@@ -22,15 +27,21 @@
 
 .loginBtn:hover {
   background-color: white;
-  color: #ff66b2;
-  border-color: #ff66b2;
+  color: #00cfb6;
+  border-color: #00cfb6;
 }
 
 .affinity-diagram {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 1000px;
+  max-width: 400px;
+  height: 500px;
+  overflow-y: auto;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
 }
 
 .main-category {

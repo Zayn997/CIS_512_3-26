@@ -9,7 +9,7 @@ CORS(app)
 
 
 # Set your OpenAI API key here
-openai.api_key = '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'
+openai.api_key = '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'
 user_answers = []
 
 
@@ -72,9 +72,9 @@ def generate_questions():
                 message = f"The user's last answer was: \"{last_answer}\". It seems brief. Could you ask a follow-up question to get more details? the question should only contain content without any additional text or explanation."
             else:
                 # Generate a new UX interview question
-                message = f"Generate a UX interview question base on the following doucuments: {topicData}"
+                message = f"Generate a UX interview simplified question without additional words base on the following doucuments: {topicData}"
 
-            response = openai.ChatCompletion.create(
+            response = openai.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant."},
@@ -97,7 +97,7 @@ def analyze_sentiment():
     user_answers.append(text)
 
     try:
-        response = openai.ChatCompletion.create(
+        response = openai.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
@@ -117,11 +117,11 @@ def extract_keywords():
     user_answers.append(answer)
 
     try:
-        response = openai.ChatCompletion.create(
+        response = openai.chat.completions.create(
            model="gpt-3.5-turbo",
               messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": f"Extract 5 keywords for analysing characteristic features from the following text: {answer}"},
+                {"role": "user", "content": f"Extract 5 keywords only words for analysing characteristic features from the following text: {answer}"},
               ],
               # max_tokens=100,
               temperature=0.3
@@ -144,7 +144,7 @@ def generate_priority_matrix():
 
 
     try:
-        response = openai.ChatCompletion.create(
+        response = openai.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
@@ -171,7 +171,7 @@ def generate_affinity_diagram():
     user_answers = data['text']
     combined_answers = " ".join(user_answers)
     try:
-        response = openai.ChatCompletion.create(
+        response = openai.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
@@ -202,11 +202,11 @@ def summarize_answers():
     combined_text = " ".join(initial)
 
     try:
-        response = openai.ChatCompletion.create(
+        response = openai.chat.completions.create(
            model="gpt-3.5-turbo",
               messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": f"Analysis his answers and summarize his pinpoints in UX perspective : {combined_text}"},
+                {"role": "user", "content": f"Analysis his answers and summarize his pinpoints in UX perspective : {combined_text},just return your pespective in json format"},
               ],
               max_tokens=150,
               temperature=0.5
@@ -222,7 +222,7 @@ def generate_greetings():
     personalInfo = data.get('personalInfo')
 
     try:
-        response = openai.ChatCompletion.create(
+        response = openai.chat.completions.create(
            model="gpt-3.5-turbo",
               messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
@@ -279,7 +279,7 @@ def calculate_importance_scores():
 
     def get_gpt_score(answer_text):
         try:
-            response = openai.Completion.create(
+            response = chat.completions.create(
                 model="gpt-3.5-turbo",
                 prompt=f"Rate the specificity and detail of this answer on a scale from 0 to 100: '{answer_text}'",
                 temperature=0,

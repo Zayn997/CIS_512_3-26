@@ -5,7 +5,6 @@ import PriorityMatrix from "./PriorityMatrix";
 import "./ResultsPage.css"; // Make sure to create this CSS file for styling
 import BubbleEffect from "./BubbleEffect";
 import Particles from "./Particles";
-import CanvasComponent from "./CanvasComponent";
 import NavigationBar from "./NavigationBar";
 import ImportanceScores from "./ImportanceScores";
 
@@ -54,16 +53,36 @@ function ResultsPage() {
         body: JSON.stringify({ text: allAnswersTexts }),
       });
       const data = await response.json();
-      setSummary(data.summary);
+      const summaryObject = JSON.parse(data.summary); // Parse the summary string into an object
+      setSummary(summaryObject);
     } catch (error) {
       console.error("Error generating summary:", error);
     }
   };
 
+  const renderSummary = (data, level = 0) => {
+    return (
+      <table className="summary-table">
+        <tbody>
+          {Object.entries(data).map(([key, value], index) => {
+            // Check if the value is an object, if so, render it recursively
+            const isObject = typeof value === "object" && value !== null;
+            return (
+              <tr key={index} className={"level-" + level}>
+                <td>{key}</td>
+                <td>{isObject ? renderSummary(value, level + 1) : value}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    );
+  };
+
   return (
     <div className="rusultspage">
       <Particles />
-      <CanvasComponent /> {/* This is the background canvas */}
+      {/* <CanvasComponent />  */}
       <NavigationBar />
       <div className="result-container">
         <div
@@ -78,8 +97,8 @@ function ResultsPage() {
           </div>
           <div className="summary-content">
             {summary && (
-              <div className="summary-text" data-lit-hue="210">
-                {summary}
+              <div className="summary-text">
+                {renderSummary(summary)}
                 <BubbleEffect className="summary-bubble-effect" />
               </div>
             )}
