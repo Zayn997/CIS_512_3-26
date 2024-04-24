@@ -10,8 +10,8 @@ body {
 .npc {
   background: linear-gradient(
     180deg,
-    rgba(169, 57, 239, 0.7) 0%,
-    rgba(98, 62, 241, 0.7) 100%
+    rgba(169, 57, 239, 0.5) 0%,
+    rgba(98, 62, 241, 0.5) 100%
   );
   width: 150px;
   height: 75px;

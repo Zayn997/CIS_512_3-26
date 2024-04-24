@@ -27,19 +27,25 @@ function SentimentNPC({ sentiment }) {
   }, []);
 
   const getColorFromSentiment = (sentiment) => {
-    // Sentiment is expected to be in the range of 0.10 to 2.00
-    let color = "rgba(128, 128, 128, 0.7)"; // Default to grey for neutral sentiment
+    let color;
 
-    if (sentiment < 0.5) {
+    if (sentiment < 1.0) {
       // More negative sentiment
-      const intensity = 1 - sentiment / 0.5;
-      const red = Math.round(255 * intensity);
-      color = `rgba(${red}, 0, 0, 0.75)`; // More intense red for more negative sentiment
-    } else if (sentiment > 1.5) {
+      const intensity = 1.0 - sentiment; // Normalize intensity from 0 to 1 as sentiment goes from 1.0 to 0
+      const red = Math.round(255 - 128 * intensity); // Start from full red and decrease based on intensity
+      const green = Math.round(255 * intensity); // Green needs to increase to mix with red for yellow
+      const blue = Math.round(128 * (1 - intensity)); // Blue should decrease to go from purple to yellow
+      color = `rgba(${red}, ${green}, ${blue}, 0.75)`; // Mix of red and green for yellow, fade blue out
+    } else if (sentiment > 1.0) {
       // More positive sentiment
-      const intensity = (sentiment - 1.5) / 0.5;
-      const green = Math.round(255 * intensity);
-      color = `rgba(0, ${green}, 0, 0.75)`; // More intense green for more positive sentiment
+      const intensity = sentiment - 1.0; // Normalize intensity from 0 to 1 as sentiment goes from 1.0 to 2.0
+      const red = 255; // Keep red at full
+      const green = Math.round(128 + (255 - 128) * intensity); // Increase green for lighter pink
+      const blue = Math.round(255 * intensity); // Increase blue for pink
+      color = `rgba(${red}, ${green}, ${blue}, 0.75)`; // End with a pink color
+    } else {
+      // Neutral sentiment
+      color = "rgba(128, 128, 128, 0.7)"; // Grey for neutral
     }
 
     return color;

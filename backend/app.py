@@ -9,7 +9,7 @@ CORS(app)
 
 
 # Set your OpenAI API key here
-openai.api_key = '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'
+openai.api_key = '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'
 user_answers = []
 
 

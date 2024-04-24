@@ -136,3 +136,7 @@ textarea {
 .form-control[type="textarea"] {
   background-color: #f8f9fb;
 }
+
+.mb-3 button {
+  float: right;
+}
