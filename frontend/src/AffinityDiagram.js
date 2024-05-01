@@ -34,7 +34,7 @@ function AffinityDiagram({ answers }) {
 
   return (
     <div className="affinity-diagram-section">
-      <button className="loginBtn" onClick={fetchAffinityDiagram}>
+      <button className="loginBtn-affinity" onClick={fetchAffinityDiagram}>
         Generate Affinity Diagram
       </button>
       {affinityDiagramData && (

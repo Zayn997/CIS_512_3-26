@@ -2,18 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import AffinityDiagram from "./AffinityDiagram";
 import PriorityMatrix from "./PriorityMatrix";
-import "./ResultsPage.css"; // Make sure to create this CSS file for styling
-import BubbleEffect from "./BubbleEffect";
+import ImportanceScores from "./ImportanceScores";
 import Particles from "./Particles";
 import NavigationBar from "./NavigationBar";
-import ImportanceScores from "./ImportanceScores";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import ViewListIcon from "@mui/icons-material/ViewList";
+import ViewModuleIcon from "@mui/icons-material/ViewModule";
+import ViewQuiltIcon from "@mui/icons-material/ViewQuilt";
+import "./ResultsPage.css";
 
 function ResultsPage() {
   const location = useLocation();
-  const { answers = [] } = location.state || {}; // Add this line
+  const { answers = [] } = location.state || {};
   const [summary, setSummary] = useState("");
   const [contentVisible, setContentVisible] = useState(false);
   const [summaryVisible, setSummaryVisible] = useState(false);
+  const [layout, setLayout] = useState("list");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,15 +40,11 @@ function ResultsPage() {
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [answers]);
 
   const handleGenerateSummary = async () => {
     const allAnswersTexts = answers.map((answerObj) => answerObj.text);
-
     try {
       const response = await fetch("http://127.0.0.1:5000/summarizeAnswers", {
         method: "POST",
@@ -53,37 +54,57 @@ function ResultsPage() {
         body: JSON.stringify({ text: allAnswersTexts }),
       });
       const data = await response.json();
-      const summaryObject = JSON.parse(data.summary); // Parse the summary string into an object
+      const summaryObject = JSON.parse(data.summary);
       setSummary(summaryObject);
     } catch (error) {
       console.error("Error generating summary:", error);
     }
   };
 
-  const renderSummary = (data, level = 0) => {
-    return (
-      <table className="summary-table">
-        <tbody>
-          {Object.entries(data).map(([key, value], index) => {
-            // Check if the value is an object, if so, render it recursively
-            const isObject = typeof value === "object" && value !== null;
-            return (
-              <tr key={index} className={"level-" + level}>
-                <td>{key}</td>
-                <td>{isObject ? renderSummary(value, level + 1) : value}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    );
+  const handleLayoutChange = (event, newLayout) => {
+    if (newLayout !== null) {
+      setLayout(newLayout);
+    }
   };
 
+  const renderSummary = (data, level = 0) => (
+    <table className="summary-table">
+      <tbody>
+        {Object.entries(data).map(([key, value], index) => {
+          const isObject = typeof value === "object" && value !== null;
+          return (
+            <tr key={index} className={"level-" + level}>
+              <td>{key}</td>
+              <td>{isObject ? renderSummary(value, level + 1) : value}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+
   return (
-    <div className="rusultspage">
+    <div className="resultsPage">
       <Particles />
-      {/* <CanvasComponent />  */}
       <NavigationBar />
+      <ToggleButtonGroup
+        orientation="vertical"
+        value={layout}
+        exclusive
+        onChange={handleLayoutChange}
+        sx={{ position: "fixed", left: 20, top: 150 }}
+        className="button-container"
+      >
+        <ToggleButton value="list" aria-label="list">
+          <ViewListIcon />
+        </ToggleButton>
+        <ToggleButton value="module" aria-label="module">
+          <ViewModuleIcon />
+        </ToggleButton>
+        <ToggleButton value="quilt" aria-label="quilt">
+          <ViewQuiltIcon />
+        </ToggleButton>
+      </ToggleButtonGroup>
       <div className="result-container">
         <div
           className={`summary-section ${
@@ -97,10 +118,7 @@ function ResultsPage() {
           </div>
           <div className="summary-content">
             {summary && (
-              <div className="summary-text">
-                {renderSummary(summary)}
-                <BubbleEffect className="summary-bubble-effect" />
-              </div>
+              <div className="summary-text">{renderSummary(summary)}</div>
             )}
           </div>
         </div>
@@ -108,7 +126,7 @@ function ResultsPage() {
         <div
           className={`chart-container ${
             contentVisible ? "slide-in visible" : "slide-in"
-          }`}
+          } ${layout}`}
         >
           <div className="chart">
             <AffinityDiagram answers={answers} />

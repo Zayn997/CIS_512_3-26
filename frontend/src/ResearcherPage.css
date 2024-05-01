@@ -80,3 +80,14 @@
 .gotointerviewee {
   margin-top: 50px;
 }
+
+.dark-mode {
+  background-image: linear-gradient(
+    90deg,
+    rgb(61, 57, 65) 0%,
+    rgb(34, 38, 43) 100%
+  );
+  color: rgb(255, 255, 255); /* Ensuring text is visible in dark mode */
+}
+
+/* Other styles */

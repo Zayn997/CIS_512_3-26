@@ -64,12 +64,12 @@
 .key-questions-input {
   flex: 1;
   margin-right: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
+  /* padding: 10px;
+  border: 1px solid #ccc; */
   border-radius: 5px;
   font-size: 14px;
-  resize: vertical; /* Allow only vertical resizing */
-  height: 40px;
+  resize: vertical;
+  background-color: #f0f0f0;
 }
 
 /* .background-input {
@@ -122,8 +122,8 @@
   width: 15px;
   bottom: 0;
   background-image: linear-gradient(to bottom, #bbf2de, #6fd8de);
-  border-top-left-radius: 15px; /* Match the top-left border-radius of .type-2 */
-  border-bottom-left-radius: 15px; /* Match the bottom-left border-radius of .type-2 */
+  border-top-left-radius: 10px; /* Match the top-left border-radius of .type-2 */
+  border-bottom-left-radius: 10px; /* Match the bottom-left border-radius of .type-2 */
 }
 
 .title-research {
@@ -143,10 +143,10 @@
 }
 
 .key-item {
-  display: flex;
-  align-items: center;
+  /* display: flex; */
+  /* align-items: center; */
   background-color: #e1e1e1;
-  border-radius: 20px;
+  border-radius: 8px;
   padding: 10px 20px;
   margin: 10px 0;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
@@ -196,7 +196,7 @@
   align-items: center;
   background-color: #ffffff;
 
-  border-radius: 20px;
+  border-radius: 8px;
   padding: 10px 20px;
   margin: 10px 0;
   box-shadow: 0 0px 5px rgba(0, 0, 0, 0.4);
@@ -213,12 +213,13 @@
   transition: all 0.2s ease-in-out;
 }
 
-.remove-sub :hover {
-  background-color: #ff4c4c;
+Button.remove-sub:hover {
+  background-color: #f55c5c;
   transition: all 0.2s ease-in-out;
+  /* border: #dfdfdf; */
 }
 
-.add-sub {
+Button.add-sub {
   margin-left: 10px;
   border: none;
   background-color: #00cfb6;
@@ -229,8 +230,8 @@
   transition: all 0.2s ease-in-out;
 }
 
-.add-sub :hover {
-  background-color: #bbf2de;
+Button.add-sub:hover {
+  background-color: #00b6a1;
 }
 
 .sub-questions-input {
@@ -308,4 +309,231 @@ textarea:hover {
 textarea:focus {
   border-color: #a0cfff;
   box-shadow: 0 0 8px #a1e5e9; /* 聚焦时边框阴影增强 */
+}
+
+.buttom-bar {
+  display: flex;
+  justify-content: space-between;
+}
+.search-btn-1 {
+  color: #ffffff;
+  float: right;
+  width: 40px;
+  height: 60px;
+  border-radius: 15px;
+  background: #00cfb6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.search-btn-1:hover {
+  background: #019c8a;
+  transition: 0.5s;
+}
+
+.importance-dropdown {
+  width: 120px;
+  background-color: #f0f0f0;
+  /* margin-left: 5px; */
+}
+/* Dark mode styles */
+.dark-mode .search-box {
+  background: #c2c2c2; /* Darker background for the search box */
+  /* You may want to change the shadow color to a lighter one for contrast */
+}
+
+.dark-mode .search-txt {
+  color: #ddd; /* Lighter text color for dark mode */
+}
+
+.dark-mode .search-btn {
+  background: #555; /* Darker background for buttons */
+  /* Adjust the button text/icon color if needed */
+}
+
+.dark-mode .search-btn:hover {
+  background: #666; /* Darker hover effect for buttons */
+  color: #00cfb6;
+}
+
+.dark-mode .text-input {
+  /* background: #222;  */
+  color: #fff; /* Light text color for dark mode */
+}
+
+.dark-mode .key-questions-input {
+  background: #6d6d6d;
+  color: #ccc; /* Lighter text color for the input */
+}
+
+.dark-mode .type-2,
+.dark-mode .type-1 {
+  background-image: linear-gradient(
+    90deg,
+    rgba(112, 112, 112, 0.836) 0%,
+    rgba(113, 68, 172, 0.904) 100%
+  );
+  color: #e3c1ff; /* Light text color for dark mode */
+  box-shadow: 0 4px 10px #272727; /* Adjusted box shadow for focus */
+}
+
+.dark-mode .type-2::before,
+.dark-mode .type-1::before {
+  background-image: linear-gradient(
+    0deg,
+    rgba(100, 24, 170, 0.836) 0%,
+    rgba(127, 69, 182, 0.904) 100%
+  );
+}
+
+.dark-mode .title-research,
+.dark-mode .key-item,
+.dark-mode .question-item,
+.dark-mode .sub-question-item {
+  background-image: linear-gradient(
+    90deg,
+    rgba(112, 112, 112, 0.836) 0%,
+    rgba(113, 68, 172, 0.904) 100%
+  );
+  color: #e3c1ff; /* Light text color for dark mode */
+}
+
+.dark-mode .question-item {
+  border: none;
+  box-shadow: 0 0 8px #cacaca; /* Adjusted box shadow for focus */
+}
+
+.dark-mode .remove-sub,
+.dark-mode .add-sub {
+  /* You can either invert the colors or choose different colors that suit the dark theme */
+  background-color: #555;
+  color: #fff;
+}
+
+.dark-mode .remove-sub:hover {
+  background-color: #dfdfdf;
+}
+
+.dark-mode .add-sub:hover {
+  background-color: #dfdfdf;
+}
+
+.dark-mode .sub-questions-input,
+.dark-mode .background-text,
+.dark-mode textarea {
+  background: #464646; /* Dark background for inputs and textarea */
+  color: #ccc; /* Lighter text color */
+  border-color: #555; /* Darker border color */
+}
+
+.dark-mode textarea:hover,
+.dark-mode textarea:focus {
+  border-color: #777; /* Adjusted border color for hover/focus */
+  box-shadow: 0 0 8px #555; /* Adjusted box shadow for focus */
+}
+
+.dark-mode .background-container {
+  /* Adjust if you want a specific style for the background container in dark mode */
+}
+
+.dark-mode .background-tag {
+  background-color: #555; /* Dark background for tags */
+  color: #ccc; /* Lighter text color for tags */
+}
+
+.dark-mode .background-tag button {
+  color: #ddd; /* Lighter button text color in tags */
+}
+
+.dark-mode .importance-dropdown {
+  background-color: #6d6d6d; /* Darker background for dropdown */
+  color: #ccc; /* Lighter text color for dropdown options */
+  border-radius: 5px;
+}
+
+/* You may need to adjust colors for .high-option, .medium-option, .low-option as well */
+.dark-mode .high-option {
+  color: #ffb85f; /* Adjusted color for high importance in dark mode */
+}
+
+.dark-mode .medium-option {
+  color: #a9cc76; /* Adjusted color for medium importance in dark mode */
+}
+
+.dark-mode .low-option {
+  color: #4d94ff; /* Adjusted color for low importance in dark mode */
+}
+
+/* Adjusting the button styles for dark mode */
+.dark-mode .search-btn,
+.dark-mode .add-sub,
+.dark-mode .search-btn-1 {
+  background-color: #9a1fff; /* Dark mode background color for buttons */
+  color: #dfdfdf; /* Light text color for readability */
+  border: 1px solid #bc81ff; /* Slightly lighter border for some depth */
+  transition: background-color 0.2s, color 0.2s; /* Smooth transition for hover effects */
+}
+
+.dark-mode .remove-sub {
+  background-color: #ff5dc1; /* Dark mode background color for buttons */
+  color: #dfdfdf; /* Light text color for readability */
+  border: 1px solid #f081ff; /* Slightly lighter border for some depth */
+  transition: background-color 0.2s, color 0.2s; /* Smooth transition for hover effects */
+}
+
+.dark-mode .remove-sub:hover {
+  background-color: #f338ab;
+}
+
+/* Hover state for buttons in dark mode to give a feedback effect */
+.dark-mode .search-btn:hover,
+.dark-mode .add-sub:hover,
+.dark-mode .search-btn-1:hover {
+  background-color: #d23cff; /* A slightly lighter background on hover */
+  color: #ffffff; /* Color accent for interactivity */
+}
+
+/* If there's a focus state defined, adjust it for dark mode as well */
+.dark-mode .search-btn:focus,
+.dark-mode .remove-sub:focus,
+.dark-mode .add-sub:focus,
+.dark-mode .search-btn-1:focus {
+  outline: 1px solid #9a1fff; /* For example, a brighter outline for focus */
+  box-shadow: 0 0 0 2px rgba(0, 207, 182, 0.5); /* A subtle glow for focused buttons */
+}
+
+/* You might also want to adjust the file upload label in dark mode */
+.dark-mode .file-upload-label {
+  color: #dcb1ff; /* Keeping the color consistent with your light mode but ensure visibility in dark mode */
+}
+
+.dark-mode .file-upload-label:hover {
+  /* Adjust the hover scale if needed, or change the color */
+  transform: scale(1.1); /* Slightly enlarge the icon as before */
+  color: #ffffff; /* Light color for the icon on hover */
+}
+
+/* For the FontAwesome icons within buttons */
+.dark-mode .search-box .search-btn .fa,
+.dark-mode .search-box:hover .search-btn .fa {
+  color: #00cfb6; /* Ensures that the icon is visible in dark mode */
+}
+
+.topic-input {
+  background-image: none;
+  background-color: none;
+}
+
+.dark-mode .loginBtn {
+  background-color: #9a1fff;
+  color: #dfdfdf;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.dark-mode .loginBtn:hover {
+  background-color: #d23cff;
+  color: #dfdfdf;
 }

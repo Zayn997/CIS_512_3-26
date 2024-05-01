@@ -2,8 +2,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./NavigationBar.css"; // Importing the CSS file
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
-const NavigationBar = () => {
+const NavigationBar = ({ darkMode, handleDarkModeChange }) => {
   return (
     <header className="navigation-header">
       <Link to="/main" className="title-link">
@@ -11,6 +13,19 @@ const NavigationBar = () => {
       </Link>
 
       <div className="navigation-buttons">
+        <FormControlLabel
+          control={
+            <Switch
+              checked={darkMode}
+              onChange={handleDarkModeChange}
+              name="darkMode"
+              color="primary"
+            />
+          }
+          label={darkMode ? "Dark Mode" : "Light Mode"}
+          labelPlacement="start"
+          className="mode-switch"
+        />
         <Link to="/results" className="title-link">
           <button className="review-button">Review</button>
         </Link>

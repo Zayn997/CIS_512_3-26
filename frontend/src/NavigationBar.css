@@ -114,3 +114,40 @@ body {
   flex-direction: row;
   justify-content: center;
 }
+
+/* Add this to the bottom of your NavigationBar.css */
+
+.mode-toggle {
+  margin-left: auto;
+  order: 2; /* This ensures that the switch is placed at the end of the navigation bar */
+}
+
+/* If you want the switch to align better with other buttons, adjust its styling */
+.mode-toggle .MuiFormControlLabel-label {
+  font-size: 0.875rem; /* match the font size to your design */
+  color: #333; /* match the color to your design */
+}
+
+/* Adjust the Switch size to better fit into the navigation bar */
+.mode-toggle .MuiSwitch-root {
+  width: 42px;
+  height: 26px;
+  padding: 0;
+}
+.mode-toggle .MuiSwitch-switchBase {
+  padding: 1px; /* To adjust the size of the clickable area */
+}
+.mode-toggle .MuiSwitch-thumb {
+  width: 24px;
+  height: 24px;
+}
+.mode-toggle .MuiSwitch-track {
+  border-radius: 13px; /* Half the height to make it circular */
+}
+
+/* Responsive adjustments if necessary */
+@media (max-width: 768px) {
+  .mode-toggle {
+    order: 3; /* Changes order on smaller screens if necessary */
+  }
+}

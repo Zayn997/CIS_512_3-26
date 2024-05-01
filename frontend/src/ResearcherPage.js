@@ -5,12 +5,15 @@ import Particles from "./Particles";
 // import CanvasComponent from "./CanvasComponent";
 import MouseEffect from "./MouseEffect";
 import NavigationBar from "./NavigationBar";
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 import "./ResearcherPage.css";
 
 function ResearcherPage() {
   const navigate = useNavigate();
   const [generatedPath, setGeneratedPath] = useState("");
+  const [darkMode, setDarkMode] = useState(false);
 
   const handleGoToIntervieweePage = () => {
     navigate("/interviewee");
@@ -22,16 +25,23 @@ function ResearcherPage() {
     setGeneratedPath(path);
   };
 
+  const handleDarkModeChange = (event) => {
+    setDarkMode(event.target.checked);
+  };
+
   return (
-    <div className="Researcherpage">
+    <div className={`Researcherpage ${darkMode ? "dark-mode" : ""}`}>
       {/* <Particles /> */}
       {/* <CanvasComponent /> */}
       <MouseEffect />
-      <NavigationBar />
+      <NavigationBar
+        darkMode={darkMode}
+        handleDarkModeChange={handleDarkModeChange}
+      />
       <div className="Researcherpage-container">
         <div className="content-1">
           <div className="topic-input-wrapper">
-            <TopicInput />
+            <TopicInput darkMode={darkMode} />
             <div className="interview-navi">
               <button className="loginBtn" onClick={handleGeneratePath}>
                 Generate Link

@@ -12,12 +12,31 @@
   height: 500px;
 }
 
+.loginBtn-affinity {
+  padding: 10px 20px;
+  background-color: #00cfb6; /* Adjusted to match the provided screenshot */
+  color: white;
+  border: none;
+  border-radius: 10px; /* More rounded corners */
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border: 2px solid transparent;
+  transition: background-color 0.3s, border-color 0.3s; /* Transition for hover effect */
+}
+
+.loginBtn-affinity:hover {
+  background-color: white;
+  color: #00cfb6;
+  border-color: #00cfb6;
+}
+
 .loginBtn {
   padding: 10px 20px;
   background-color: #00cfb6; /* Adjusted to match the provided screenshot */
   color: white;
   border: none;
-  border-radius: 20px; /* More rounded corners */
+  border-radius: 10px; /* More rounded corners */
   cursor: pointer;
   margin-bottom: 20px;
   font-size: 16px;
