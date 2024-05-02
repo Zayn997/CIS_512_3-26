@@ -15,7 +15,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
-function TopicInput({ darkMode, onGenerate }) {
+function TopicInput({ darkMode }) {
   const [topic, setTopic] = useState("");
   const [background, setBackground] = useState([]); // For ReactQuill input
   const [backgroundFile, setBackgroundFile] = useState(null); // For file upload
@@ -71,13 +71,28 @@ function TopicInput({ darkMode, onGenerate }) {
     localStorage.setItem("keyQuestions", JSON.stringify(items));
   };
 
-  const handleSave = (event) => {
+  const handleSave = (event, section) => {
     event.preventDefault();
     //save to local varible
     const topicData = { topic, background, backgroundFile, keyQuestions };
     localStorage.setItem("topicData", JSON.stringify(topicData));
-    // remind you all the data being saved
-    alert("Topic data saved successfully!");
+    // Provide feedback based on the section saved
+    let savedSection = "all data";
+    switch (section) {
+      case "search-box":
+        savedSection = "topic";
+        break;
+      case "background-section":
+        savedSection = "background";
+        break;
+      case "key-questions-section":
+        savedSection = "key questions";
+        break;
+      default:
+        savedSection = "all data";
+    }
+
+    alert(`Saved ${savedSection} successfully!`);
   };
 
   //key questions dropdown settings
@@ -137,7 +152,7 @@ function TopicInput({ darkMode, onGenerate }) {
   return (
     <div className={`topic-input ${getDarkModeClass()}`}>
       <DragDropContext onDragEnd={handleDragEnd}>
-        <form onSubmit={handleSave}>
+        <form>
           <div className="search-box">
             <input
               type="text"
@@ -146,12 +161,12 @@ function TopicInput({ darkMode, onGenerate }) {
               onChange={(e) => setTopic(e.target.value)}
               placeholder="Enter a research group you are interested"
             />
-            <button className="search-btn" type="submit">
-              <i
-                // className="fa fa-sharp fa-solid fa-circle-check"
-                className="fa-solid fa-floppy-disk"
-                aria-hidden="true"
-              ></i>
+            <button
+              className="search-btn"
+              type="button"
+              onClick={(e) => handleSave(e, "topic")}
+            >
+              <i className="fa-solid fa-floppy-disk" aria-hidden="true"></i>
             </button>
           </div>
           <div className="text-input">
@@ -191,6 +206,13 @@ function TopicInput({ darkMode, onGenerate }) {
                     </div>
                   ))}
                 </div>
+                <button
+                  className="loginBtn-save-sentence"
+                  type="button"
+                  onClick={(e) => handleSave(e, "background")}
+                >
+                  <i className="fa-solid fa-floppy-disk" aria-hidden="true"></i>
+                </button>
               </div>
             </div>
 
@@ -385,7 +407,11 @@ function TopicInput({ darkMode, onGenerate }) {
                 >
                   <i class="fa-solid fa-plus"></i>
                 </button>
-                <button className="loginBtn" type="submit">
+                <button
+                  className="loginBtn"
+                  type="button"
+                  onClick={(e) => handleSave(e, "keyQuestions")}
+                >
                   <i className="fa-solid fa-floppy-disk" aria-hidden="true"></i>
                 </button>
               </div>

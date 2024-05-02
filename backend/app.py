@@ -9,50 +9,9 @@ CORS(app)
 
 
 # Set your OpenAI API key here
-openai.api_key = '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'
+openai.api_key = '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'
 user_answers = []
 
-
-# @app.route('/generateQuestions', methods=['POST'])
-# def generate_questions():
-#     data = request.json
-#     topic = data.get('topic')
-
-#     try:
-#         questions = []
-
-#         # Generate 10 different questions
-#         for i in range(3):
-#             response = openai.ChatCompletion.create(
-#                 model="gpt-3.5-turbo",
-#                 messages=[
-#                     {"role": "system", "content": "You are a helpful assistant."},
-#                     {"role": "user", "content": f"Based on the user's answer of last question to asking them once a time, if they type no detailed, ask them to give more details no more than 2 times,Generate a UX interview question about: {topic}"},
-#                 ],
-#                 # max_tokens=100,
-#                 temperature=0.7
-#             )
-#             main_question = response.choices[0].message.content.strip()
-
-#             # Generate 4 similar questions for each main question
-#             similar_questions = [main_question]
-#             for j in range(3):
-#                 similar_response = openai.ChatCompletion.create(
-#                     model="gpt-3.5-turbo",
-#                     messages=[
-#                         {"role": "system", "content": "You are a helpful assistant."},
-#                         {"role": "user", "content": f"Generate a similar question to: {main_question}"},
-#                     ],
-#                     # max_tokens=100,
-#                     temperature=0.7
-#                 )
-#                 similar_questions.append(similar_response.choices[0].message.content.strip())
-
-#             questions.append(similar_questions)
-
-#         return jsonify({'questions': questions})
-#     except Exception as e:
-#         return jsonify({'error': str(e)}), 500
 @app.route('/generateQuestions', methods=['POST'])
 def generate_questions():
     data = request.json
@@ -72,7 +31,7 @@ def generate_questions():
                 message = f"The user's last answer was: \"{last_answer}\". It seems brief. Could you ask a follow-up question to get more details? the question should only contain content without any additional text or explanation."
             else:
                 # Generate a new UX interview question
-                message = f"Generate a UX interview simplified question without additional words base on the following doucuments: {topicData}"
+                message = f"Generate a UX interview simplified question without additional words base on the following doucuments: {topicData}, you should combined all the imformation I send you"
 
             response = openai.chat.completions.create(
                 model="gpt-3.5-turbo",

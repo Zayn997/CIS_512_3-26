@@ -108,7 +108,7 @@
   background-image: linear-gradient(100deg, #ffffff 0%, #ffffff 100%);
 
   /* background-image: linear-gradient(100deg, #bbf2de59 0%, #6fd9de2c 100%); */
-  height: 400px;
+  height: 450px;
   border-radius: 10px;
   position: relative;
   box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
@@ -261,7 +261,7 @@ Button.add-sub:hover {
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
-  max-height: 150px;
+  max-height: 170px;
   overflow-y: scroll;
 }
 
@@ -338,6 +338,26 @@ textarea:focus {
   width: 120px;
   background-color: #f0f0f0;
   /* margin-left: 5px; */
+}
+
+.loginBtn-save-sentence {
+  padding: 10px 20px;
+  background-color: #00cfb6; /* Adjusted to match the provided screenshot */
+  color: white;
+  border: none;
+  border-radius: 10px; /* More rounded corners */
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border: 2px solid transparent;
+  transition: background-color 0.3s, border-color 0.3s; /* Transition for hover effect */
+  float: right;
+}
+
+.loginBtn-save-sentence:hover {
+  background-color: white;
+  color: #00cfb6;
+  border-color: #00cfb6;
 }
 /* Dark mode styles */
 .dark-mode .search-box {
