@@ -9,7 +9,7 @@ CORS(app)
 
 
 # Set your OpenAI API key here
-openai.api_key = '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'
+openai.api_key = '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'
 user_answers = []
 
 @app.route('/generateQuestions', methods=['POST'])
@@ -31,7 +31,7 @@ def generate_questions():
                 message = f"The user's last answer was: \"{last_answer}\". It seems brief. Could you ask a follow-up question to get more details? the question should only contain content without any additional text or explanation."
             else:
                 # Generate a new UX interview question
-                message = f"Generate a UX interview simplified question without additional words base on the following doucuments: {topicData}, you should combined all the imformation I send you"
+                message = f"Generate a UX interview simplified question without additional words base on the following doucuments: {topicData}, you should consider all the imformation I send you,don't need to show them all together, but need to used a revised mannor or way to ask"
 
             response = openai.chat.completions.create(
                 model="gpt-3.5-turbo",

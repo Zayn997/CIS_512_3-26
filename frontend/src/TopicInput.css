@@ -557,3 +557,14 @@ textarea:focus {
   background-color: #d23cff;
   color: #dfdfdf;
 }
+
+.dark-mode .loginBtn-save-sentence {
+  background-color: #9a1fff;
+  color: #dfdfdf;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.dark-mode .loginBtn-save-sentence:hover {
+  background-color: #d23cff;
+  color: #dfdfdf;
+}

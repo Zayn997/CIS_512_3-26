@@ -73,19 +73,20 @@ function TopicInput({ darkMode }) {
 
   const handleSave = (event, section) => {
     event.preventDefault();
+    console.log("Saving section:", section);
     //save to local varible
     const topicData = { topic, background, backgroundFile, keyQuestions };
     localStorage.setItem("topicData", JSON.stringify(topicData));
     // Provide feedback based on the section saved
     let savedSection = "all data";
     switch (section) {
-      case "search-box":
+      case "topic":
         savedSection = "topic";
         break;
-      case "background-section":
+      case "background":
         savedSection = "background";
         break;
-      case "key-questions-section":
+      case "keyQuestions":
         savedSection = "key questions";
         break;
       default:
