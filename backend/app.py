@@ -9,7 +9,7 @@ CORS(app)
 
 
 # Set your OpenAI API key here
-openai.api_key = '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'
+openai.api_key = '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'
 user_answers = []
 
 @app.route('/generateQuestions', methods=['POST'])
